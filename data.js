@@ -1,9 +1,90 @@
-const resourceAssets = [
+/**
+ * Asset schema (multi-language ready)
+ * -----------------------------------
+ * description: string | { id: string, en: string }
+ * title:       string | { id: string, en: string }  (optional)
+ * category:    string key (e.g. "3D Models") | { key: "3D Models", id?: string, en?: string }
+ *
+ * Legacy string descriptions are normalized to { id, en } on export.
+ * Replace auto-translated `en` copy with hand-written text over time.
+ */
+const DESCRIPTION_PHRASE_MAP = [
+  ['Situs populer untuk', 'Popular site for'],
+  ['Platform animasi karakter 3D gratis', 'Free 3D character animation platform'],
+  ['Koleksi aset game gratis seperti', 'Free game asset collection with'],
+  ['Galeri model 3D interaktif', 'Interactive 3D model gallery'],
+  ['Marketplace model 3D gratis', 'Free 3D model marketplace'],
+  ['Sumber tekstur PBR berkualitas tinggi', 'High-quality PBR texture source'],
+  ['Perpustakaan tekstur CC0 gratis', 'Free CC0 texture library'],
+  ['Koleksi tekstur gratis', 'Free texture collection'],
+  ['Tekstur gratis berkualitas tinggi', 'High-quality free textures'],
+  ['Situs tekstur gratis', 'Free texture site'],
+  ['Koleksi foto gratis', 'Free photo collection'],
+  ['Foto dan video stok gratis', 'Free stock photos and videos'],
+  ['Platform foto', 'Photo platform'],
+  ['Perpustakaan ikon gratis', 'Free icon library'],
+  ['Ilustrasi karakter vektor gratis', 'Free customizable vector character illustrations'],
+  ['gratis', 'free'],
+  ['berkualitas tinggi', 'high quality'],
+  ['mudah digunakan', 'easy to use'],
+  ['mudah dikustomisasi', 'easy to customize'],
+  ['pengembang indie', 'indie developers'],
+  ['visualisasi arsitektur', 'architectural visualization'],
+  ['presentasi interaktif', 'interactive presentations'],
+  ['proyek visual kreatif', 'creative visual projects'],
+  ['proyek real-time 3D', 'real-time 3D projects'],
+  ['untuk', 'for'],
+  ['dan', 'and'],
+  ['yang', 'that'],
+  ['dengan', 'with'],
+  ['dalam', 'in'],
+  ['cocok untuk', 'great for'],
+  ['seperti', 'such as'],
+  ['banyak', 'many'],
+  ['tanpa biaya', 'at no cost']
+];
+
+function translateDescriptionToEn(idText = '') {
+  let text = idText;
+  DESCRIPTION_PHRASE_MAP.forEach(([from, to]) => {
+    text = text.split(from).join(to);
+  });
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function normalizeLocalizedField(value, enValue) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return value;
+  }
+  if (typeof value !== 'string') {
+    return value;
+  }
+  return {
+    id: value,
+    en: enValue || value
+  };
+}
+
+function normalizeAsset(asset) {
+  const idDescription = typeof asset.description === 'string' ? asset.description : asset.description?.id;
+  return {
+    ...asset,
+    description: normalizeLocalizedField(
+      asset.description,
+      idDescription ? translateDescriptionToEn(idDescription) : undefined
+    )
+  };
+}
+
+const resourceAssetsRaw = [
   {
     id: 1,
     title: "Kenney.nl",
     category: "3D Models",
-    description: "Situs populer untuk aset game 2D dan 3D gratis yang mudah digunakan dalam prototipe dan game indie.",
+    description: {
+      id: "Situs populer untuk aset game 2D dan 3D gratis yang mudah digunakan dalam prototipe dan game indie.",
+      en: "Popular site for free 2D and 3D game assets that are easy to use in prototypes and indie games."
+    },
     url: "https://kenney.nl",
     imageUrl: "https://picsum.photos/seed/asset1/800/450",
     tags: ["game", "2D", "3D", "free", "assets"]
@@ -900,5 +981,7 @@ const resourceAssets = [
     tags: ["icons", "free", "vector", "UI", "design"]
   }
 ];
+
+const resourceAssets = resourceAssetsRaw.map(normalizeAsset);
 
 export default resourceAssets;
