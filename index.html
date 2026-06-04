@@ -1,15 +1,28 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Creator's Toolbox</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class'
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: {
+              DEFAULT: 'var(--accent-color)',
+              light: 'var(--accent-color-light)',
+              lighter: 'var(--accent-color-lighter)',
+              dark: 'var(--accent-color-dark)'
+            }
+          }
+        }
+      }
     };
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
       --accent-color: #4f46e5;
@@ -34,6 +47,12 @@
       --accent-color-light: #fef3c7;
       --accent-color-lighter: #fffbeb;
       --accent-color-dark: #d97706;
+    }
+    [data-accent='indigo'] {
+      --accent-color: #4f46e5;
+      --accent-color-light: #e0e7ff;
+      --accent-color-lighter: #f0f4ff;
+      --accent-color-dark: #4338ca;
     }
     @keyframes xpGlowPulse {
       0%, 100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
@@ -62,32 +81,35 @@
     <header class="mb-8 rounded-[2rem] bg-white/90 p-6 shadow-2xl shadow-slate-200/50 backdrop-blur-xl transition-colors duration-300 dark:bg-slate-900/95 dark:shadow-none sm:p-8">
       <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div class="max-w-4xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-600">Kurator Aset Gratis</p>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-accent">Kurator Aset Gratis</p>
           <h1 class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-50">The Creator's Toolbox</h1>
           <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300">Kumpulan sumber daya gratis untuk kreator: model, tekstur, audio, font, dan gambar berkualitas tinggi dalam satu tampilan yang mudah dijelajahi.</p>
-          <div id="xpStatus" class="mt-6 rounded-[1.75rem] border border-indigo-200 bg-gradient-to-r from-indigo-50 via-slate-50 to-amber-100 p-5 shadow-sm shadow-indigo-200/20 dark:border-indigo-500/30 dark:bg-slate-900/80">
+          <div id="xpStatus" class="mt-6 rounded-[1.75rem] border border-accent-light bg-gradient-to-r from-accent-lighter via-slate-50 to-amber-100 p-5 shadow-sm shadow-accent/20 dark:border-accent/30 dark:bg-slate-900/80">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p id="xpLevelLabel" class="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-700 dark:text-indigo-300">Level 1 Novice Designer</p>
+                <p id="xpLevelLabel" class="text-sm font-semibold uppercase tracking-[0.25em] text-accent-dark dark:text-accent-light">Level 1 Novice Designer</p>
                 <p id="xpCountLabel" class="mt-1 text-sm text-slate-700 dark:text-slate-300">0 / 100 XP</p>
               </div>
               <div class="w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800 sm:max-w-2xl">
-                <div id="xpProgressFill" class="h-3 w-0 rounded-full bg-gradient-to-r from-amber-400 via-indigo-500 to-violet-500 transition-all duration-500"></div>
+                <div id="xpProgressFill" class="h-3 w-0 rounded-full bg-gradient-to-r from-amber-400 via-accent to-accent-dark transition-all duration-500"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3">
-          <button id="suggestButton" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">Punya Saran Aset?</button>
-          <button id="inspireButton" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">Inspirasi Acak</button>
-          <select id="accentColorSelect" class="h-11 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-indigo-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
+        <div class="flex w-full min-w-0 flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
+          <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <button id="suggestButton" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">Punya Saran Aset?</button>
+          <button id="inspireButton" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">Inspirasi Acak</button>
+          </div>
+          <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <select id="accentColorSelect" class="h-11 min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
             <option value="indigo">Indigo</option>
             <option value="emerald">Emerald</option>
             <option value="rose">Rose</option>
             <option value="amber">Amber</option>
           </select>
-          <button id="themeToggle" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">
+          <button id="themeToggle" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">
             <span class="flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.75.47-3.375 1.286-4.786a.75.75 0 00-1.26-.786A10.5 10.5 0 002.25 15c0 5.799 4.701 10.5 10.5 10.5 5.799 0 10.5-4.701 10.5-10.5a10.5 10.5 0 00-2.998-7.252.75.75 0 00-1.26.786z" />
@@ -95,9 +117,10 @@
               Dark
             </span>
           </button>
-          <div class="flex items-center gap-2">
-            <label for="languageSelect" class="text-sm font-semibold text-slate-500 dark:text-slate-400">Bahasa</label>
-            <select id="languageSelect" class="h-11 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-indigo-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
+          </div>
+          <div class="flex min-w-0 items-center gap-2 sm:shrink-0">
+            <label for="languageSelect" class="shrink-0 text-sm font-semibold text-slate-500 dark:text-slate-400">Bahasa</label>
+            <select id="languageSelect" class="h-11 min-w-0 flex-1 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 sm:flex-none">
               <option value="id">ID</option>
               <option value="en">EN</option>
             </select>
@@ -109,35 +132,38 @@
     <section class="mb-8 rounded-[2rem] bg-white p-4 shadow-lg shadow-slate-200/40 transition-colors duration-300 dark:bg-slate-900 dark:shadow-slate-950/40 sm:p-6">
       <div class="flex flex-col gap-5">
         <div class="flex flex-wrap gap-3">
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="All">All</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="3D Models">3D Models</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="Textures">Textures</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="SFX/Music">SFX/Music</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="Fonts">Fonts</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="Photos/Vectors">Photos/Vectors</button>
-          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10" data-category="Favorites">Favorit Saya</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="All">All</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="3D Models">3D Models</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Textures">Textures</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="SFX/Music">SFX/Music</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Fonts">Fonts</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Photos/Vectors">Photos/Vectors</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Favorites">Favorit Saya</button>
         </div>
 
-        <div class="grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
-          <div>
+        <div class="flex flex-col gap-4 lg:grid lg:grid-cols-[1fr_auto] lg:items-end">
+          <div class="min-w-0">
             <label for="searchInput" id="searchLabel" class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Cari aset berdasarkan nama asset, kategori, tag, atau deskripsi</label>
-            <div class="relative">
-              <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-400" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-5 w-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.4a7.25 7.25 0 1 1-14.5 0 7.25 7.25 0 0 1 14.5 0Z" />
-                </svg>
-              </span>
-              <input id="searchInput" type="text" placeholder="Cari aset..." class="w-full rounded-3xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-indigo-400" />
+            <div id="searchFilterShell" class="flex flex-col gap-3">
+              <div class="relative min-w-0 w-full">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-400" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.4a7.25 7.25 0 1 1-14.5 0 7.25 7.25 0 0 1 14.5 0Z" />
+                  </svg>
+                </span>
+                <input id="searchInput" type="text" placeholder="Cari aset..." class="w-full rounded-3xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-slate-900 outline-none transition-all duration-300 ease-in-out focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-accent" />
+              </div>
+              <div id="searchFilterControls" class="grid grid-cols-1 gap-3 sm:grid-cols-2"></div>
             </div>
           </div>
-          <div class="flex items-center gap-3">
+          <div class="flex flex-wrap items-center justify-between gap-3 sm:justify-end lg:justify-end">
             <p id="resultCount" class="text-sm font-medium text-slate-600 dark:text-slate-300">Menampilkan 0 aset</p>
-            <button id="layoutGridBtn" type="button" title="Grid Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-indigo-500/10">
+            <button id="layoutGridBtn" type="button" title="Grid Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-accent/10">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 4.5h6v6h-6v-6Zm9.75 0h6v6h-6v-6ZM4.5 14.25h6v6h-6v-6Zm9.75 0h6v6h-6v-6Z" />
               </svg>
             </button>
-            <button id="layoutListBtn" type="button" title="List Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-indigo-500/10">
+            <button id="layoutListBtn" type="button" title="List Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-accent/10">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12M8.25 17.25h12M3.75 6.75h.01M3.75 12h.01M3.75 17.25h.01" />
               </svg>
@@ -145,8 +171,8 @@
           </div>
         </div>
         <div class="mt-4 flex flex-wrap items-center gap-3">
-          <button id="exportFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">Ekspor Favorit</button>
-          <button id="importFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-indigo-300 hover:bg-indigo-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">Impor Favorit</button>
+          <button id="exportFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">Ekspor Favorit</button>
+          <button id="importFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">Impor Favorit</button>
           <input id="importFavoritesInput" type="file" accept="application/json" class="hidden" />
         </div>
         <div id="miniTagCloud" class="mt-4 flex flex-wrap gap-2"></div>
@@ -157,10 +183,10 @@
       <div id="frequentlyVisitedSection" class="mb-6 hidden">
         <div class="flex items-center justify-between gap-3 rounded-[1.5rem] border border-slate-200 bg-white/80 p-4 shadow-sm shadow-slate-200/50 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/80 dark:shadow-slate-950/40">
           <div>
-            <p id="frequentlyVisitedTitle" class="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-600">Sering Kamu Kunjungi</p>
+            <p id="frequentlyVisitedTitle" class="text-sm font-semibold uppercase tracking-[0.3em] text-accent">Sering Kamu Kunjungi</p>
             <p id="frequentlyVisitedSubtitle" class="mt-1 text-sm text-slate-600 dark:text-slate-400">Aset yang paling sering kamu buka dan kunjungi.</p>
           </div>
-          <span id="frequentlyVisitedLabel" class="hidden rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-700 dark:bg-indigo-200/15 dark:text-indigo-200"></span>
+          <span id="frequentlyVisitedLabel" class="hidden rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark dark:bg-accent/15 dark:text-accent-light"></span>
         </div>
         <div id="frequentlyVisitedList" class="mt-4 flex gap-4 overflow-x-auto pb-1"></div>
       </div>
@@ -182,11 +208,11 @@
         <div class="grid gap-4 sm:grid-cols-2">
           <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
             <span id="labelAssetName">Nama Aset</span>
-            <input id="suggestTitle" type="text" placeholder="Contoh: Free3D" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
+            <input id="suggestTitle" type="text" placeholder="Contoh: Free3D" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
           </label>
           <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
             <span id="labelCategory">Kategori</span>
-            <select id="suggestCategory" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required>
+            <select id="suggestCategory" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required>
               <option value="3D Models">3D Models</option>
               <option value="Textures">Textures</option>
               <option value="SFX/Music">SFX/Music</option>
@@ -198,17 +224,17 @@
 
         <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
           <span id="labelLink">Link Aset</span>
-          <input id="suggestUrl" type="url" placeholder="https://..." class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
+          <input id="suggestUrl" type="url" placeholder="https://..." class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
         </label>
 
         <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
           <span id="labelNotes">Catatan singkat</span>
-          <textarea id="suggestNotes" rows="4" placeholder="Kenapa aset ini penting untuk kreator?" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"></textarea>
+          <textarea id="suggestNotes" rows="4" placeholder="Kenapa aset ini penting untuk kreator?" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"></textarea>
         </label>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
-          <button type="submit" class="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700">Kirim Saran</button>
-          <button id="cancelForm" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-indigo-400 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">Batal</button>
+          <button type="submit" class="inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-dark">Kirim Saran</button>
+          <button id="cancelForm" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">Batal</button>
         </div>
 
         <p id="suggestSuccess" class="hidden rounded-3xl bg-emerald-50 p-4 text-sm text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">Terima kasih! Saran asetmu sudah dicatat dan email saran sedang dibuka untuk dikirim.</p>
@@ -357,12 +383,12 @@
 
     function updateLayoutUI() {
       const isGrid = activeLayout === 'grid';
-      layoutGridBtn.classList.toggle('bg-indigo-600', isGrid);
+      layoutGridBtn.classList.toggle('bg-accent', isGrid);
       layoutGridBtn.classList.toggle('text-white', isGrid);
-      layoutGridBtn.classList.toggle('border-indigo-600', isGrid);
-      layoutListBtn.classList.toggle('bg-indigo-600', !isGrid);
+      layoutGridBtn.classList.toggle('border-accent', isGrid);
+      layoutListBtn.classList.toggle('bg-accent', !isGrid);
       layoutListBtn.classList.toggle('text-white', !isGrid);
-      layoutListBtn.classList.toggle('border-indigo-600', !isGrid);
+      layoutListBtn.classList.toggle('border-accent', !isGrid);
     }
 
     function setLayout(layout) {
@@ -554,6 +580,63 @@
       return text;
     }
 
+    function getLocalizedValue(value, fallback = '') {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return value[currentLang] || value.id || value.en || Object.values(value).find(Boolean) || fallback;
+      }
+      return value || fallback;
+    }
+
+    function getAssetField(asset, fieldName, fallback = '') {
+      if (!asset || typeof asset !== 'object') return fallback;
+      const value = asset[fieldName];
+      const camelLangField = `${fieldName}${currentLang.charAt(0).toUpperCase()}${currentLang.slice(1)}`;
+      const snakeLangField = `${fieldName}_${currentLang}`;
+      const fallbackCamel = `${fieldName}Id`;
+      const fallbackSnake = `${fieldName}_id`;
+      return getLocalizedValue(
+        value ?? asset[camelLangField] ?? asset[snakeLangField] ?? asset[fallbackCamel] ?? asset[fallbackSnake],
+        fallback
+      );
+    }
+
+    function getAssetCategoryKey(asset) {
+      const rawCategory = asset?.category;
+      if (rawCategory && typeof rawCategory === 'object' && !Array.isArray(rawCategory)) {
+        return rawCategory.key || rawCategory.id || rawCategory.en || 'All';
+      }
+      return rawCategory || 'All';
+    }
+
+    function getAssetCategoryLabel(asset) {
+      const categoryValue = asset?.category;
+      if (categoryValue && typeof categoryValue === 'object' && !Array.isArray(categoryValue)) {
+        return getLocalizedValue(categoryValue, categoryValue.key || 'All');
+      }
+      const categoryKey = getAssetCategoryKey(asset);
+      const L = locales[currentLang] || locales.id;
+      return (L.categoryLabels && L.categoryLabels[categoryKey]) || categoryKey;
+    }
+
+    function getAssetSearchHaystack(asset) {
+      if (!asset || typeof asset !== 'object') return '';
+      const categoryKey = getAssetCategoryKey(asset);
+      return [
+        getAssetField(asset, 'title', ''),
+        getAssetField(asset, 'description', ''),
+        categoryKey,
+        getAssetCategoryLabel(asset),
+        asset.url || '',
+        ...(Array.isArray(asset.tags) ? asset.tags : [])
+      ].join(' ').toLowerCase();
+    }
+
+    function assetMatchesCategory(asset, category) {
+      if (category === 'All') return true;
+      if (category === 'Favorites') return isFavorite(asset.id);
+      return getAssetCategoryKey(asset) === category;
+    }
+
     function renderThemeToggle(isDark) {
       const L = locales[currentLang] || locales.id;
       themeToggle.innerHTML = `
@@ -667,7 +750,7 @@
         const pill = document.createElement('button');
         pill.type = 'button';
         pill.dataset.tag = tag;
-        pill.className = 'inline-flex rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10';
+        pill.className = 'inline-flex rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10';
         pill.textContent = `#${tag}`;
         miniTagCloud.appendChild(pill);
       });
@@ -687,21 +770,23 @@
 
       assets.forEach(asset => {
         const count = clickCounts[asset.id] || 0;
+        const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+        const assetCategory = getAssetCategoryLabel(asset);
         const item = document.createElement('button');
         item.type = 'button';
         item.dataset.assetId = asset.id;
-        item.className = 'min-w-[220px] rounded-[1.5rem] border border-white/70 bg-white/75 p-4 text-left shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-indigo-300 hover:bg-indigo-50/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:text-slate-100 dark:hover:border-indigo-500 dark:hover:bg-indigo-900/40';
+        item.className = 'min-w-[220px] shrink-0 rounded-[1.5rem] border border-white/70 bg-white/75 p-4 text-left shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-accent-light hover:bg-accent-lighter/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:text-slate-100 dark:hover:border-accent dark:hover:bg-accent/10';
         item.innerHTML = `
           <div class="mb-3 flex items-center gap-3">
             <div class="h-12 w-12 overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800">
-              <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="${asset.title}" class="h-full w-full object-cover" />
+              <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="${assetTitle}" class="h-full w-full object-cover" />
             </div>
             <div>
-              <p class="text-sm font-semibold text-slate-900 dark:text-slate-50">${asset.title}</p>
+              <p class="text-sm font-semibold text-slate-900 dark:text-slate-50">${assetTitle}</p>
               <p class="text-xs text-slate-500 dark:text-slate-400">${t('visitCount', { count })}</p>
             </div>
           </div>
-          <p class="text-sm text-slate-600 dark:text-slate-400">${asset.category}</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">${assetCategory}</p>
         `;
         frequentlyVisitedList.appendChild(item);
       });
@@ -750,11 +835,9 @@
     }
 
     function buildFilterControls() {
-      // insert sort and tag selects next to the search input programmatically
-      const searchContainer = document.getElementById('searchInput').parentElement;
+      const searchFilterControls = document.getElementById('searchFilterControls');
 
-      // sort select
-      sortSelect.className = 'ml-2 h-10 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
+      sortSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
       sortSelect.innerHTML = `
         <option value="best">Best match</option>
         <option value="popular">Most popular</option>
@@ -763,17 +846,11 @@
       `;
       sortSelect.value = activeSort;
 
-      // tag select (populated below)
-      tagSelect.className = 'ml-2 h-10 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
+      tagSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
       tagSelect.innerHTML = `<option value="All">All tags</option>`;
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'mt-3 flex items-center gap-2';
-      wrapper.appendChild(sortSelect);
-      wrapper.appendChild(tagSelect);
-
-      // place after the search input field
-      searchContainer.appendChild(wrapper);
+      searchFilterControls.appendChild(sortSelect);
+      searchFilterControls.appendChild(tagSelect);
 
       sortSelect.addEventListener('change', e => {
         activeSort = e.target.value;
@@ -903,14 +980,14 @@
             </div>
             <div class="flex flex-col gap-4">
               <div>
-                <span id="detailModalCategory" class="inline-flex rounded-full bg-indigo-100 px-3 py-1 text-sm font-semibold text-indigo-700 dark:bg-indigo-200/15 dark:text-indigo-200"></span>
+                <span id="detailModalCategory" class="inline-flex rounded-full bg-accent-light px-3 py-1 text-sm font-semibold text-accent-dark dark:bg-accent/15 dark:text-accent-light"></span>
                 <h3 id="detailModalTitle" class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-50"></h3>
               </div>
               <p id="detailModalDescription" class="text-sm leading-7 text-slate-600 dark:text-slate-300"></p>
               <div id="detailModalTags" class="flex flex-wrap gap-2"></div>
               <div class="mt-auto space-y-3">
-                <a id="detailModalVisit" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg">${locales[currentLang].visitSite}</a>
-                <button id="detailModalCopy" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-indigo-500/10">${locales[currentLang].copyLink}</button>
+                <a id="detailModalVisit" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-md shadow-accent/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-lg">${locales[currentLang].visitSite}</a>
+                <button id="detailModalCopy" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">${locales[currentLang].copyLink}</button>
                 <button id="detailBrokenLinkBtn" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-rose-500 bg-rose-50 px-5 py-3 text-sm font-semibold text-rose-700 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-rose-100 hover:shadow-md dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-200 dark:hover:bg-rose-500/20">${locales[currentLang].reportBrokenLink}</button>
               </div>
             </div>
@@ -939,20 +1016,20 @@
       const currentCategory = activeCategory || 'All';
       const query = buildSearchQuery(searchValue, currentCategory);
       const card = document.createElement('article');
-      card.className = 'col-span-full cursor-pointer overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 p-6 text-left text-slate-900 shadow-xl shadow-slate-400/10 transition duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:shadow-2xl dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100 dark:hover:border-indigo-500';
+      card.className = 'col-span-full cursor-pointer overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-slate-100 to-accent-lighter p-6 text-left text-slate-900 shadow-xl shadow-slate-400/10 transition duration-300 hover:-translate-y-1 hover:border-accent-light hover:shadow-2xl dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100 dark:hover:border-accent';
       card.innerHTML = `
         <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div class="flex items-start gap-4">
-            <div class="flex h-16 w-16 items-center justify-center rounded-3xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/20">${icons.search}</div>
+            <div class="flex h-16 w-16 items-center justify-center rounded-3xl bg-accent text-white shadow-lg shadow-accent/20">${icons.search}</div>
             <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.35em] text-indigo-700 dark:text-indigo-300">${t('internetSearchFallbackAction').toUpperCase()}</p>
+              <p class="text-sm font-semibold uppercase tracking-[0.35em] text-accent-dark dark:text-accent-light">${t('internetSearchFallbackAction').toUpperCase()}</p>
               <h3 class="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-50">${t('internetSearchFallback', { query })}</h3>
               <p class="mt-3 max-w-xl text-sm leading-7 text-slate-600 dark:text-slate-400">${t('internetSearchFallbackDescription')}</p>
             </div>
           </div>
           <div class="flex flex-col items-start gap-3 sm:items-end">
             <span class="rounded-full bg-slate-900/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white shadow-sm dark:bg-white/10 dark:text-slate-100">${currentCategory === 'All' ? 'All Assets' : currentCategory}</span>
-            <button class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400">
+            <button class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-accent dark:bg-accent dark:hover:bg-accent-dark">
               ${t('internetSearchFallbackAction')}
             </button>
           </div>
@@ -981,12 +1058,15 @@
       const tagsContainer = detailModal.querySelector('#detailModalTags');
       const visitButton = detailModal.querySelector('#detailModalVisit');
       const copyButton = detailModal.querySelector('#detailModalCopy');
+      const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+      const assetDescription = getAssetField(asset, 'description', '');
+      const assetCategory = getAssetCategoryLabel(asset);
 
       image.src = asset.imageUrl || PLACEHOLDER_IMAGE;
-      image.alt = `Preview ${asset.title}`;
-      title.textContent = asset.title;
-      category.textContent = asset.category;
-      description.textContent = asset.description;
+      image.alt = `Preview ${assetTitle}`;
+      title.textContent = assetTitle;
+      category.textContent = assetCategory;
+      description.textContent = assetDescription;
       visitButton.href = asset.url;
       visitButton.innerHTML = `${locales[currentLang].visitSite} ${icons.arrowTopRight}`;
       copyButton.textContent = locales[currentLang].copyLink;
@@ -996,7 +1076,7 @@
       (Array.isArray(asset.tags) ? asset.tags : []).forEach(tag => {
         const tagButton = document.createElement('button');
         tagButton.type = 'button';
-        tagButton.className = 'rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-indigo-100 hover:text-indigo-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-indigo-500/15 dark:hover:text-indigo-200';
+        tagButton.className = 'rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-accent-lighter hover:text-accent-dark dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-accent/15 dark:hover:text-accent-light';
         tagButton.textContent = `#${tag}`;
         tagButton.addEventListener('click', () => setActiveTag(tag));
         tagsContainer.appendChild(tagButton);
@@ -1069,28 +1149,31 @@
       const L = locales[currentLang] || locales.id;
       const isListMode = activeLayout === 'list';
       const favoriteLabel = favorited ? L.favoriteRemove : L.favoriteAdd;
+      const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+      const assetDescription = getAssetField(asset, 'description', '');
+      const assetCategory = getAssetCategoryLabel(asset);
       card.dataset.assetCardId = asset.id;
 
       if (isListMode) {
-        card.className = 'group flex cursor-pointer items-center gap-4 rounded-[1rem] border border-white/70 bg-white/75 p-3 shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:hover:bg-slate-900/90';
+        card.className = 'group flex cursor-pointer items-center gap-4 rounded-[1rem] border border-white/70 bg-white/75 p-3 shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:hover:bg-slate-900/90';
         card.innerHTML = `
           <div class="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-900">
-            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${asset.title}" class="h-full w-full object-cover" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
+            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${assetTitle}" class="h-full w-full object-cover" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
           </div>
           <div class="min-w-0 flex-grow">
-            <h3 class="text-sm font-semibold text-slate-900 truncate dark:text-slate-50">${asset.title}</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">${asset.category}</p>
+            <h3 class="text-sm font-semibold text-slate-900 truncate dark:text-slate-50">${assetTitle}</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">${assetCategory}</p>
           </div>
           <div class="flex-shrink-0 flex items-center gap-2">
-            <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-md" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
+            <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-md" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
             <button type="button" aria-label="${favoriteLabel}" title="${favoriteLabel}" data-asset-id="${asset.id}" class="favorite-btn inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 ${favorited ? 'bg-rose-50 text-rose-500 dark:bg-rose-500/10' : 'text-slate-500 dark:text-slate-300'} transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-100 hover:text-rose-500 hover:shadow-md dark:border-slate-700 dark:hover:bg-rose-500/15">${icons.heart(favorited)}</button>
           </div>
         `;
       } else {
-        card.className = 'group cursor-pointer rounded-[1.75rem] border border-white/70 bg-white/75 p-0 shadow-md shadow-slate-200/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-indigo-300 hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:shadow-slate-950/40 dark:hover:bg-slate-900/90';
+        card.className = 'group cursor-pointer rounded-[1.75rem] border border-white/70 bg-white/75 p-0 shadow-md shadow-slate-200/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-accent-light hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:shadow-slate-950/40 dark:hover:bg-slate-900/90';
         card.innerHTML = `
           <div class="relative overflow-hidden rounded-t-[1.75rem] bg-slate-100 dark:bg-slate-900">
-            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${asset.title}" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
+            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${assetTitle}" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
             <div class="absolute left-4 top-4 flex items-center gap-2">
               <span class="inline-flex items-center gap-1.5 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-100" aria-label="${L.popularityLabel}: ${asset.popularity || 0}">${icons.spark}${asset.popularity || 0}</span>
             </div>
@@ -1099,16 +1182,16 @@
           <div class="p-6">
             <div class="mb-4 flex items-start justify-between gap-3">
               <div class="min-w-0">
-                <h2 class="text-xl font-semibold text-slate-900 transition group-hover:text-indigo-600 dark:text-slate-50">${asset.title}</h2>
-                <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">${asset.description}</p>
+                <h2 class="text-xl font-semibold text-slate-900 transition group-hover:text-accent dark:text-slate-50">${assetTitle}</h2>
+                <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">${assetDescription}</p>
               </div>
-              <span class="whitespace-nowrap rounded-full bg-indigo-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-indigo-700 dark:bg-indigo-200/15 dark:text-indigo-200">${asset.category}</span>
+              <span class="whitespace-nowrap rounded-full bg-accent-light px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent-dark dark:bg-accent/15 dark:text-accent-light">${assetCategory}</span>
             </div>
             <div class="mb-5 flex flex-wrap gap-2">
               ${Array.isArray(asset.tags) ? asset.tags.map(tag => `<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">#${tag}</span>`).join('') : ''}
             </div>
             <div class="flex items-center justify-between gap-3">
-              <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-2 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
+              <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md shadow-accent/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-lg" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
             </div>
           </div>
         `;
@@ -1135,9 +1218,7 @@
       if (!allTerms.length && activeTag === 'All') {
         return assets
           .filter(asset => {
-            const matchesCategory = activeCategory === 'All'
-              || (activeCategory === 'Favorites' && isFavorite(asset.id))
-              || asset.category === activeCategory;
+            const matchesCategory = assetMatchesCategory(asset, activeCategory);
             const matchesTag = activeTag === 'All' || (Array.isArray(asset.tags) && asset.tags.includes(activeTag));
             return matchesCategory && matchesTag;
           })
@@ -1155,7 +1236,7 @@
             }
 
             // default: alphabetical
-            return a.title.localeCompare(b.title);
+            return getAssetField(a, 'title', '').localeCompare(getAssetField(b, 'title', ''));
           });
       }
 
@@ -1165,21 +1246,11 @@
             return null;
           }
 
-          const matchesCategory = activeCategory === 'All'
-            || (activeCategory === 'Favorites' && isFavorite(asset.id))
-            || asset.category === activeCategory;
-
-          if (!matchesCategory) {
+          if (!assetMatchesCategory(asset, activeCategory)) {
             return null;
           }
 
-          const haystack = [
-            asset.title || '',
-            asset.description || '',
-            asset.category || '',
-            asset.url || '',
-            ...(Array.isArray(asset.tags) ? asset.tags : [])
-          ].join(' ').toLowerCase();
+          const haystack = getAssetSearchHaystack(asset);
 
           const matchesAll = textTerms.every(term => haystack.includes(term));
           if (!matchesAll) {
@@ -1192,15 +1263,20 @@
             return null;
           }
 
+          const assetTitle = getAssetField(asset, 'title', '').toLowerCase();
+          const assetDescription = getAssetField(asset, 'description', '').toLowerCase();
+          const categoryKey = getAssetCategoryKey(asset).toLowerCase();
+          const categoryLabel = getAssetCategoryLabel(asset).toLowerCase();
+
           let score = 0;
           const fullSearch = normalizedSearch;
-          if ((asset.title || '').toLowerCase().includes(fullSearch)) score += 80;
-          if ((asset.description || '').toLowerCase().includes(fullSearch)) score += 30;
+          if (assetTitle.includes(fullSearch)) score += 80;
+          if (assetDescription.includes(fullSearch)) score += 30;
 
           textTerms.forEach(term => {
-            if ((asset.title || '').toLowerCase().includes(term)) score += 30;
-            if ((asset.description || '').toLowerCase().includes(term)) score += 10;
-            if ((asset.category || '').toLowerCase().includes(term)) score += 6;
+            if (assetTitle.includes(term)) score += 30;
+            if (assetDescription.includes(term)) score += 10;
+            if (categoryKey.includes(term) || categoryLabel.includes(term)) score += 6;
             if ((asset.url || '').toLowerCase().includes(term)) score += 4;
             if (Array.isArray(asset.tags) && asset.tags.some(tag => String(tag).toLowerCase().includes(term))) score += 15;
           });
@@ -1270,7 +1346,8 @@
       categoryButtons.forEach(button => {
         const isActive = button.dataset.category === category;
         button.classList.add('transition-all', 'duration-300', 'ease-in-out');
-        button.classList.toggle('bg-indigo-600', isActive);
+        button.classList.toggle('bg-accent', isActive);
+        button.classList.toggle('border-accent', isActive);
         button.classList.toggle('text-white', isActive);
         button.classList.toggle('shadow-md', isActive);
         button.classList.toggle('hover:-translate-y-0.5', !isActive);
