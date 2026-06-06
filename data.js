@@ -984,5 +984,9 @@ const resourceAssetsRaw = [
 
 const resourceAssets = resourceAssetsRaw.map(normalizeAsset);
 
+<<<<<<< HEAD
 /** Classic script global (works with file:// and static hosting). */
 window.CREATORS_TOOLBOX_ASSETS = resourceAssets;
+=======
+export default resourceAssets;
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a

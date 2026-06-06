@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 ﻿<!DOCTYPE html>
+=======
+<!DOCTYPE html>
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
+=======
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
   <title>The Creator's Toolbox</title>
   <script>
     window.tailwind = window.tailwind || {};
@@ -22,6 +29,7 @@
             }
           }
         }
+<<<<<<< HEAD
       },
       safelist: [
         'bg-accent', 'bg-accent-dark', 'bg-accent-light', 'bg-accent-lighter',
@@ -33,6 +41,9 @@
         'shadow-accent/20', 'dark:hover:bg-accent/10', 'dark:bg-accent/15',
         'from-accent-lighter', 'via-accent', 'to-accent-dark'
       ]
+=======
+      }
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
     };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -87,6 +98,7 @@
       transition-duration: 300ms;
       transition-timing-function: ease-in-out;
     }
+<<<<<<< HEAD
     /* Fallback if Tailwind CDN misses custom accent utilities */
     .bg-accent { background-color: var(--accent-color) !important; }
     .bg-accent-dark { background-color: var(--accent-color-dark) !important; }
@@ -104,6 +116,8 @@
     .focus\:border-accent:focus { border-color: var(--accent-color) !important; }
     .focus\:ring-accent-light:focus { --tw-ring-color: var(--accent-color-light); }
     .group:hover .group-hover\:text-accent { color: var(--accent-color) !important; }
+=======
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
   </style>
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-900 transition-all duration-300 ease-in-out dark:bg-slate-950 dark:text-slate-100">
@@ -112,10 +126,14 @@
       <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div class="max-w-4xl">
           <p class="text-sm font-semibold uppercase tracking-[0.3em] text-accent">Kurator Aset Gratis</p>
+<<<<<<< HEAD
           <h1 class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-50">
             The Creator's Toolbox
             <span id="appVersion" class="ml-2 align-middle text-xs font-bold uppercase tracking-widest text-accent" title="Build 2026-06-04">v1.1</span>
           </h1>
+=======
+          <h1 class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-50">The Creator's Toolbox</h1>
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
           <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300">Kumpulan sumber daya gratis untuk kreator: model, tekstur, audio, font, dan gambar berkualitas tinggi dalam satu tampilan yang mudah dijelajahi.</p>
           <div id="xpStatus" class="mt-6 rounded-[1.75rem] border border-accent-light bg-gradient-to-r from-accent-lighter via-slate-50 to-amber-100 p-5 shadow-sm shadow-accent/20 dark:border-accent/30 dark:bg-slate-900/80">
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -275,6 +293,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <script src="./data.js?v=20260604"></script>
   <script>
     function getResourceAssets() {
@@ -282,6 +301,10 @@
     }
 
     let resourceAssets = getResourceAssets();
+=======
+  <script type="module">
+    import resourceAssets from './data.js';
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
 
     const assetGrid = document.getElementById('assetGrid');
     const searchInput = document.getElementById('searchInput');
@@ -334,8 +357,12 @@
     const favorites = new Set(loadFavorites());
     const suggestions = loadSuggestions();
     const clickCounts = loadClickCounts();
+<<<<<<< HEAD
     const assetsById = new Map();
     resourceAssets.forEach(asset => assetsById.set(String(asset.id), asset));
+=======
+    const assetsById = new Map(resourceAssets.map(asset => [String(asset.id), asset]));
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
 
     function loadGamificationState() {
       try {
@@ -873,11 +900,16 @@
       updateView();
     }
 
+<<<<<<< HEAD
     let filterControlsReady = false;
 
     function buildFilterControls() {
       const searchFilterControls = document.getElementById('searchFilterControls');
       if (!searchFilterControls) return;
+=======
+    function buildFilterControls() {
+      const searchFilterControls = document.getElementById('searchFilterControls');
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
 
       sortSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
       sortSelect.innerHTML = `
@@ -891,6 +923,7 @@
       tagSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
       tagSelect.innerHTML = `<option value="All">All tags</option>`;
 
+<<<<<<< HEAD
       if (!filterControlsReady) {
         searchFilterControls.appendChild(sortSelect);
         searchFilterControls.appendChild(tagSelect);
@@ -909,6 +942,22 @@
 
         filterControlsReady = true;
       }
+=======
+      searchFilterControls.appendChild(sortSelect);
+      searchFilterControls.appendChild(tagSelect);
+
+      sortSelect.addEventListener('change', e => {
+        activeSort = e.target.value;
+        localStorage.setItem(SORT_STORAGE_KEY, activeSort);
+        updateView();
+      });
+
+      tagSelect.addEventListener('change', e => {
+        activeTag = e.target.value;
+        localStorage.setItem(TAG_STORAGE_KEY, activeTag);
+        updateView();
+      });
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
     }
 
     function populateTagOptions() {
@@ -969,17 +1018,25 @@
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
+<<<<<<< HEAD
     function applyTheme(theme, options = {}) {
       const { silent = false } = options;
+=======
+    function applyTheme(theme) {
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
       const isDark = theme === 'dark';
       document.documentElement.classList.toggle('dark', isDark);
       document.body.classList.toggle('dark', isDark);
       const L = locales[currentLang] || locales.id;
       renderThemeToggle(isDark);
       localStorage.setItem(THEME_STORAGE_KEY, theme);
+<<<<<<< HEAD
       if (!silent) {
         showToast(isDark ? L.toastThemeDark : L.toastThemeLight);
       }
+=======
+      showToast(isDark ? L.toastThemeDark : L.toastThemeLight);
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
     }
 
     function loadSuggestions() {
@@ -1572,6 +1629,7 @@
       }
     });
 
+<<<<<<< HEAD
     function showBootError(message) {
       const banner = document.createElement('div');
       banner.id = 'bootErrorBanner';
@@ -1609,6 +1667,19 @@
     } else {
       bootApp();
     }
+=======
+    // init
+    buildFilterControls();
+    populateTagOptions();
+    createDetailModal();
+    applyLanguage(currentLang);
+    languageSelect.value = currentLang;
+    applyTheme(loadTheme());
+    updateActiveCategoryButton(activeCategory);
+    applyAccentColor(activeAccent);
+    updateLayoutUI();
+    updateView();
+>>>>>>> 6eb776fd044f7ce5e4081d60fa4bf41800df207a
   </script>
 </body>
 </html>
