@@ -1,0 +1,9 @@
+{
+  "name": "creators-toolbox",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-i18n.mjs",
+    "dev": "npx --yes serve . -p 3000"
+  }
+}

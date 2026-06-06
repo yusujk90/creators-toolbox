@@ -1,0 +1,1614 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>The Creator's Toolbox</title>
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: {
+              DEFAULT: 'var(--accent-color)',
+              light: 'var(--accent-color-light)',
+              lighter: 'var(--accent-color-lighter)',
+              dark: 'var(--accent-color-dark)'
+            }
+          }
+        }
+      },
+      safelist: [
+        'bg-accent', 'bg-accent-dark', 'bg-accent-light', 'bg-accent-lighter',
+        'text-accent', 'text-accent-dark', 'text-accent-light',
+        'border-accent', 'border-accent-light',
+        'hover:bg-accent', 'hover:bg-accent-dark', 'hover:bg-accent-lighter',
+        'hover:border-accent', 'hover:border-accent-light', 'hover:text-accent',
+        'focus:border-accent', 'focus:ring-accent-light',
+        'shadow-accent/20', 'dark:hover:bg-accent/10', 'dark:bg-accent/15',
+        'from-accent-lighter', 'via-accent', 'to-accent-dark'
+      ]
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --accent-color: #4f46e5;
+      --accent-color-light: #e0e7ff;
+      --accent-color-lighter: #f0f4ff;
+      --accent-color-dark: #3f3ae3;
+    }
+    [data-accent='emerald'] {
+      --accent-color: #10b981;
+      --accent-color-light: #d1fae5;
+      --accent-color-lighter: #ecfdf5;
+      --accent-color-dark: #059669;
+    }
+    [data-accent='rose'] {
+      --accent-color: #f43f5e;
+      --accent-color-light: #ffe4e6;
+      --accent-color-lighter: #fff1f2;
+      --accent-color-dark: #e11d48;
+    }
+    [data-accent='amber'] {
+      --accent-color: #f59e0b;
+      --accent-color-light: #fef3c7;
+      --accent-color-lighter: #fffbeb;
+      --accent-color-dark: #d97706;
+    }
+    [data-accent='indigo'] {
+      --accent-color: #4f46e5;
+      --accent-color-light: #e0e7ff;
+      --accent-color-lighter: #f0f4ff;
+      --accent-color-dark: #4338ca;
+    }
+    @keyframes xpGlowPulse {
+      0%, 100% { box-shadow: 0 0 0 rgba(255, 215, 0, 0); }
+      50% { box-shadow: 0 0 24px rgba(79, 70, 229, 0.75); }
+    }
+    .xp-levelup-glow {
+      animation: xpGlowPulse 1.2s ease-in-out;
+    }
+    html,
+    body,
+    button,
+    input,
+    select,
+    textarea,
+    article,
+    section,
+    header {
+      transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+      transition-duration: 300ms;
+      transition-timing-function: ease-in-out;
+    }
+    /* Fallback if Tailwind CDN misses custom accent utilities */
+    .bg-accent { background-color: var(--accent-color) !important; }
+    .bg-accent-dark { background-color: var(--accent-color-dark) !important; }
+    .bg-accent-light { background-color: var(--accent-color-light) !important; }
+    .bg-accent-lighter { background-color: var(--accent-color-lighter) !important; }
+    .text-accent { color: var(--accent-color) !important; }
+    .text-accent-dark { color: var(--accent-color-dark) !important; }
+    .text-accent-light { color: var(--accent-color-light) !important; }
+    .border-accent { border-color: var(--accent-color) !important; }
+    .border-accent-light { border-color: var(--accent-color-light) !important; }
+    .hover\:bg-accent-dark:hover { background-color: var(--accent-color-dark) !important; }
+    .hover\:bg-accent-lighter:hover { background-color: var(--accent-color-lighter) !important; }
+    .hover\:border-accent-light:hover { border-color: var(--accent-color-light) !important; }
+    .hover\:text-accent:hover { color: var(--accent-color) !important; }
+    .focus\:border-accent:focus { border-color: var(--accent-color) !important; }
+    .focus\:ring-accent-light:focus { --tw-ring-color: var(--accent-color-light); }
+    .group:hover .group-hover\:text-accent { color: var(--accent-color) !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-900 transition-all duration-300 ease-in-out dark:bg-slate-950 dark:text-slate-100">
+  <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+    <header class="mb-8 rounded-[2rem] bg-white/90 p-6 shadow-2xl shadow-slate-200/50 backdrop-blur-xl transition-colors duration-300 dark:bg-slate-900/95 dark:shadow-none sm:p-8">
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div class="max-w-4xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-accent">Kurator Aset Gratis</p>
+          <h1 class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl dark:text-slate-50">
+            The Creator's Toolbox
+            <span id="appVersion" class="ml-2 align-middle text-xs font-bold uppercase tracking-widest text-accent" title="Build 2026-06-04">v1.1</span>
+          </h1>
+          <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300">Kumpulan sumber daya gratis untuk kreator: model, tekstur, audio, font, dan gambar berkualitas tinggi dalam satu tampilan yang mudah dijelajahi.</p>
+          <div id="xpStatus" class="mt-6 rounded-[1.75rem] border border-accent-light bg-gradient-to-r from-accent-lighter via-slate-50 to-amber-100 p-5 shadow-sm shadow-accent/20 dark:border-accent/30 dark:bg-slate-900/80">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p id="xpLevelLabel" class="text-sm font-semibold uppercase tracking-[0.25em] text-accent-dark dark:text-accent-light">Level 1 Novice Designer</p>
+                <p id="xpCountLabel" class="mt-1 text-sm text-slate-700 dark:text-slate-300">0 / 100 XP</p>
+              </div>
+              <div class="w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800 sm:max-w-2xl">
+                <div id="xpProgressFill" class="h-3 w-0 rounded-full bg-gradient-to-r from-amber-400 via-accent to-accent-dark transition-all duration-500"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex w-full min-w-0 flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
+          <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <button id="suggestButton" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">Punya Saran Aset?</button>
+          <button id="inspireButton" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">Inspirasi Acak</button>
+          </div>
+          <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+          <select id="accentColorSelect" class="h-11 min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
+            <option value="indigo">Indigo</option>
+            <option value="emerald">Emerald</option>
+            <option value="rose">Rose</option>
+            <option value="amber">Amber</option>
+          </select>
+          <button id="themeToggle" type="button" class="inline-flex min-w-0 items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10 sm:px-4 sm:text-sm">
+            <span class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.75.47-3.375 1.286-4.786a.75.75 0 00-1.26-.786A10.5 10.5 0 002.25 15c0 5.799 4.701 10.5 10.5 10.5 5.799 0 10.5-4.701 10.5-10.5a10.5 10.5 0 00-2.998-7.252.75.75 0 00-1.26.786z" />
+              </svg>
+              Dark
+            </span>
+          </button>
+          </div>
+          <div class="flex min-w-0 items-center gap-2 sm:shrink-0">
+            <label for="languageSelect" class="shrink-0 text-sm font-semibold text-slate-500 dark:text-slate-400">Bahasa</label>
+            <select id="languageSelect" class="h-11 min-w-0 flex-1 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 sm:flex-none">
+              <option value="id">ID</option>
+              <option value="en">EN</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="mb-8 rounded-[2rem] bg-white p-4 shadow-lg shadow-slate-200/40 transition-colors duration-300 dark:bg-slate-900 dark:shadow-slate-950/40 sm:p-6">
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-wrap gap-3">
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="All">All</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="3D Models">3D Models</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Textures">Textures</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="SFX/Music">SFX/Music</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Fonts">Fonts</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Photos/Vectors">Photos/Vectors</button>
+          <button class="category-btn rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-300 ease-in-out hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10" data-category="Favorites">Favorit Saya</button>
+        </div>
+
+        <div class="flex flex-col gap-4 lg:grid lg:grid-cols-[1fr_auto] lg:items-end">
+          <div class="min-w-0">
+            <label for="searchInput" id="searchLabel" class="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Cari aset berdasarkan nama asset, kategori, tag, atau deskripsi</label>
+            <div id="searchFilterShell" class="flex flex-col gap-3">
+              <div class="relative min-w-0 w-full">
+                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 dark:text-slate-400" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-5 w-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.4a7.25 7.25 0 1 1-14.5 0 7.25 7.25 0 0 1 14.5 0Z" />
+                  </svg>
+                </span>
+                <input id="searchInput" type="text" placeholder="Cari aset..." class="w-full rounded-3xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-slate-900 outline-none transition-all duration-300 ease-in-out focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-accent" />
+              </div>
+              <div id="searchFilterControls" class="grid grid-cols-1 gap-3 sm:grid-cols-2"></div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 sm:justify-end lg:justify-end">
+            <p id="resultCount" class="text-sm font-medium text-slate-600 dark:text-slate-300">Menampilkan 0 aset</p>
+            <button id="layoutGridBtn" type="button" title="Grid Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-accent/10">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 4.5h6v6h-6v-6Zm9.75 0h6v6h-6v-6ZM4.5 14.25h6v6h-6v-6Zm9.75 0h6v6h-6v-6Z" />
+              </svg>
+            </button>
+            <button id="layoutListBtn" type="button" title="List Mode" class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 bg-slate-50 text-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-accent/10">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12M8.25 17.25h12M3.75 6.75h.01M3.75 12h.01M3.75 17.25h.01" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-3">
+          <button id="exportFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">Ekspor Favorit</button>
+          <button id="importFavoritesBtn" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-accent-lighter dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">Impor Favorit</button>
+          <input id="importFavoritesInput" type="file" accept="application/json" class="hidden" />
+        </div>
+        <div id="miniTagCloud" class="mt-4 flex flex-wrap gap-2"></div>
+      </div>
+    </section>
+
+    <main>
+      <div id="frequentlyVisitedSection" class="mb-6 hidden">
+        <div class="flex items-center justify-between gap-3 rounded-[1.5rem] border border-slate-200 bg-white/80 p-4 shadow-sm shadow-slate-200/50 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/80 dark:shadow-slate-950/40">
+          <div>
+            <p id="frequentlyVisitedTitle" class="text-sm font-semibold uppercase tracking-[0.3em] text-accent">Sering Kamu Kunjungi</p>
+            <p id="frequentlyVisitedSubtitle" class="mt-1 text-sm text-slate-600 dark:text-slate-400">Aset yang paling sering kamu buka dan kunjungi.</p>
+          </div>
+          <span id="frequentlyVisitedLabel" class="hidden rounded-full bg-accent-light px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-accent-dark dark:bg-accent/15 dark:text-accent-light"></span>
+        </div>
+        <div id="frequentlyVisitedList" class="mt-4 flex gap-4 overflow-x-auto pb-1"></div>
+      </div>
+      <div id="assetGrid" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"></div>
+    </main>
+  </div>
+
+  <div id="suggestModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 px-4 py-8 backdrop-blur-sm">
+    <div class="w-full max-w-2xl rounded-[2rem] bg-white p-6 shadow-2xl transition-colors duration-300 dark:bg-slate-900">
+      <div class="mb-4 flex items-center justify-between gap-4">
+        <div>
+          <h2 id="modalTitle" class="text-xl font-semibold text-slate-900 dark:text-slate-50">Saran Aset</h2>
+          <p id="modalDescription" class="mt-1 text-sm text-slate-500 dark:text-slate-400">Kirim ide aset baru yang menurutmu bagus untuk dimasukkan ke toolbox ini. Setelah submit, draf email akan dibuka ke tim kami.</p>
+        </div>
+        <button id="closeModal" type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-xl text-slate-900 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700">×</button>
+      </div>
+
+      <form id="suggestForm" class="space-y-4">
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+            <span id="labelAssetName">Nama Aset</span>
+            <input id="suggestTitle" type="text" placeholder="Contoh: Free3D" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
+          </label>
+          <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+            <span id="labelCategory">Kategori</span>
+            <select id="suggestCategory" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required>
+              <option value="3D Models">3D Models</option>
+              <option value="Textures">Textures</option>
+              <option value="SFX/Music">SFX/Music</option>
+              <option value="Fonts">Fonts</option>
+              <option value="Photos/Vectors">Photos/Vectors</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <span id="labelLink">Link Aset</span>
+          <input id="suggestUrl" type="url" placeholder="https://..." class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100" required />
+        </label>
+
+        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <span id="labelNotes">Catatan singkat</span>
+          <textarea id="suggestNotes" rows="4" placeholder="Kenapa aset ini penting untuk kreator?" class="mt-2 w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"></textarea>
+        </label>
+
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
+          <button type="submit" class="inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-dark">Kirim Saran</button>
+          <button id="cancelForm" type="button" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-accent-light hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">Batal</button>
+        </div>
+
+        <p id="suggestSuccess" class="hidden rounded-3xl bg-emerald-50 p-4 text-sm text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">Terima kasih! Saran asetmu sudah dicatat dan email saran sedang dibuka untuk dikirim.</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="./data.js?v=20260604"></script>
+  <script>
+    function getResourceAssets() {
+      return Array.isArray(window.CREATORS_TOOLBOX_ASSETS) ? window.CREATORS_TOOLBOX_ASSETS : [];
+    }
+
+    let resourceAssets = getResourceAssets();
+
+    const assetGrid = document.getElementById('assetGrid');
+    const searchInput = document.getElementById('searchInput');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const resultCount = document.getElementById('resultCount');
+    const sortSelect = document.createElement('select');
+    sortSelect.id = 'sortSelect';
+    const tagSelect = document.createElement('select');
+    tagSelect.id = 'tagSelect';
+    const themeToggle = document.getElementById('themeToggle');
+    const languageSelect = document.getElementById('languageSelect');
+    const inspireButton = document.getElementById('inspireButton');
+    const exportFavoritesBtn = document.getElementById('exportFavoritesBtn');
+    const importFavoritesBtn = document.getElementById('importFavoritesBtn');
+    const importFavoritesInput = document.getElementById('importFavoritesInput');
+    const layoutGridBtn = document.getElementById('layoutGridBtn');
+    const layoutListBtn = document.getElementById('layoutListBtn');
+    const accentColorSelect = document.getElementById('accentColorSelect');
+    const frequentlyVisitedSection = document.getElementById('frequentlyVisitedSection');
+    const frequentlyVisitedList = document.getElementById('frequentlyVisitedList');
+    const frequentlyVisitedTitle = document.getElementById('frequentlyVisitedTitle');
+    const frequentlyVisitedSubtitle = document.getElementById('frequentlyVisitedSubtitle');
+    const frequentlyVisitedLabel = document.getElementById('frequentlyVisitedLabel');
+    const miniTagCloud = document.getElementById('miniTagCloud');
+
+    const FAVORITES_STORAGE_KEY = 'creatorsToolboxFavorites';
+    const THEME_STORAGE_KEY = 'creatorsToolboxTheme';
+    const SUGGESTIONS_STORAGE_KEY = 'creatorsToolboxSuggestions';
+    const CLICK_COUNT_STORAGE_KEY = 'creatorsToolboxClickCount';
+    const LANG_STORAGE_KEY = 'creatorsToolboxLang';
+    const GAMIFICATION_STORAGE_KEY = 'creatorsToolboxGamification';
+    const LAYOUT_STORAGE_KEY = 'creatorsToolboxLayout';
+    const ACCENT_COLOR_STORAGE_KEY = 'creatorsToolboxAccent';
+    const SUGGESTION_EMAIL = 'yusujk90@gmil.com';
+    const PLACEHOLDER_IMAGE = 'https://picsum.photos/seed/placeholder/800/600';
+    const SORT_STORAGE_KEY = 'creatorsToolboxSort';
+    const TAG_STORAGE_KEY = 'creatorsToolboxTag';
+    const TOAST_TIMEOUT = 3000;
+    const ASSET_XP_COOLDOWN_MS = 15000;
+
+    let activeCategory = 'All';
+    let detailModal = null;
+    let activeSort = localStorage.getItem(SORT_STORAGE_KEY) || 'best';
+    let activeTag = localStorage.getItem(TAG_STORAGE_KEY) || 'All';
+    let activeLayout = localStorage.getItem(LAYOUT_STORAGE_KEY) || 'grid';
+    let activeAccent = localStorage.getItem(ACCENT_COLOR_STORAGE_KEY) || 'indigo';
+    let searchTerm = '';
+    const gamificationState = loadGamificationState();
+    const assetXpTimestamps = {};
+    const favorites = new Set(loadFavorites());
+    const suggestions = loadSuggestions();
+    const clickCounts = loadClickCounts();
+    const assetsById = new Map();
+    resourceAssets.forEach(asset => assetsById.set(String(asset.id), asset));
+
+    function loadGamificationState() {
+      try {
+        const raw = localStorage.getItem(GAMIFICATION_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : null;
+        if (parsed && typeof parsed === 'object' && typeof parsed.xp === 'number' && typeof parsed.level === 'number') {
+          return { xp: parsed.xp, level: parsed.level };
+        }
+      } catch (error) {
+        // ignore invalid saved state
+      }
+      return { xp: 0, level: 1 };
+    }
+
+    function saveGamificationState() {
+      localStorage.setItem(GAMIFICATION_STORAGE_KEY, JSON.stringify(gamificationState));
+    }
+
+    function getBadgeName(level) {
+      if (level <= 3) return 'Novice Designer';
+      if (level <= 7) return 'Asset Hunter';
+      if (level <= 12) return 'Creative Ninja';
+      return 'The Ultimate Creator';
+    }
+
+    function getNextLevelXp(level) {
+      return level * 100;
+    }
+
+    function addXp(amount) {
+      if (!amount || amount <= 0) return;
+      gamificationState.xp += amount;
+      let nextLevelXp = getNextLevelXp(gamificationState.level);
+      while (gamificationState.xp >= nextLevelXp) {
+        gamificationState.xp -= nextLevelXp;
+        gamificationState.level += 1;
+        nextLevelXp = getNextLevelXp(gamificationState.level);
+        const badgeName = getBadgeName(gamificationState.level);
+        showToast(t('levelUpToast', { badge: badgeName, level: gamificationState.level }));
+        const xpBar = document.getElementById('xpProgressFill');
+        if (xpBar) {
+          xpBar.classList.add('xp-levelup-glow');
+          setTimeout(() => xpBar.classList.remove('xp-levelup-glow'), 1200);
+        }
+      }
+      saveGamificationState();
+      updateGamificationUI();
+    }
+
+    function awardAssetXp(assetId) {
+      if (!assetId) return false;
+      const now = Date.now();
+      const lastTime = assetXpTimestamps[assetId] || 0;
+      if (now - lastTime < ASSET_XP_COOLDOWN_MS) {
+        return false;
+      }
+      assetXpTimestamps[assetId] = now;
+      addXp(10);
+      return true;
+    }
+
+    function updateGamificationUI() {
+      const levelLabel = document.getElementById('xpLevelLabel');
+      const xpCountLabel = document.getElementById('xpCountLabel');
+      const xpBar = document.getElementById('xpProgressFill');
+      const nextXp = getNextLevelXp(gamificationState.level);
+      if (levelLabel) {
+        levelLabel.textContent = `Level ${gamificationState.level} ${getBadgeName(gamificationState.level)}`;
+      }
+      if (xpCountLabel) {
+        xpCountLabel.textContent = `${gamificationState.xp} / ${nextXp} XP`;
+      }
+      if (xpBar) {
+        xpBar.style.width = `${Math.min(100, (gamificationState.xp / nextXp) * 100)}%`;
+      }
+    }
+
+    function applyAccentColor(accent) {
+      activeAccent = accent || 'indigo';
+      document.documentElement.setAttribute('data-accent', activeAccent);
+      localStorage.setItem(ACCENT_COLOR_STORAGE_KEY, activeAccent);
+      accentColorSelect.value = activeAccent;
+    }
+
+    function updateLayoutUI() {
+      const isGrid = activeLayout === 'grid';
+      layoutGridBtn.classList.toggle('bg-accent', isGrid);
+      layoutGridBtn.classList.toggle('text-white', isGrid);
+      layoutGridBtn.classList.toggle('border-accent', isGrid);
+      layoutListBtn.classList.toggle('bg-accent', !isGrid);
+      layoutListBtn.classList.toggle('text-white', !isGrid);
+      layoutListBtn.classList.toggle('border-accent', !isGrid);
+    }
+
+    function setLayout(layout) {
+      activeLayout = layout;
+      localStorage.setItem(LAYOUT_STORAGE_KEY, layout);
+      updateLayoutUI();
+      updateView();
+    }
+
+    const suggestButton = document.getElementById('suggestButton');
+    const suggestModal = document.getElementById('suggestModal');
+    const closeModal = document.getElementById('closeModal');
+    const cancelForm = document.getElementById('cancelForm');
+    const suggestForm = document.getElementById('suggestForm');
+    const suggestSuccess = document.getElementById('suggestSuccess');
+    const suggestTitle = document.getElementById('suggestTitle');
+    const suggestCategory = document.getElementById('suggestCategory');
+    const suggestUrl = document.getElementById('suggestUrl');
+    const suggestNotes = document.getElementById('suggestNotes');
+
+    // i18n strings
+    const locales = {
+      id: {
+        headerSubtitle: 'Kurator Aset Gratis',
+        headerTitle: "The Creator's Toolbox",
+        headerDescription: 'Kumpulan sumber daya gratis untuk kreator: model, tekstur, audio, font, dan gambar berkualitas tinggi dalam satu tampilan yang mudah dijelajahi.',
+        suggestButton: 'Punya Saran Aset?',
+        themeDark: 'Dark',
+        themeLight: 'Light',
+        searchLabel: 'Cari aset berdasarkan nama asset, kategori, tag, atau deskripsi',
+        searchPlaceholder: 'Cari aset...',
+        suggestTitle: 'Nama Aset',
+        suggestCategory: 'Kategori',
+        suggestLink: 'Link Aset',
+        suggestNotes: 'Catatan singkat',
+        suggestSubmit: 'Kirim Saran',
+        suggestCancel: 'Batal',
+        suggestSuccess: 'Terima kasih! Saran asetmu sudah dicatat dan email saran sedang dibuka untuk dikirim.',
+        noResults: 'Tidak ada aset yang cocok dengan filter dan pencarian.',
+        showingAssets: 'Menampilkan {count} aset',
+        visitCount: '{count} kunjungan',
+        visitSite: 'Kunjungi Situs',
+        favoriteAdd: 'Tambah ke favorit',
+        favoriteRemove: 'Hapus dari favorit',
+        copyLink: 'Salin Link',
+        copiedLink: 'Link berhasil disalin!',
+        copyFailed: 'Tidak dapat menyalin link.',
+        popularityLabel: 'Popularitas',
+        toastFavoriteAdded: 'Berhasil menambahkan ke favorit!',
+        toastFavoriteRemoved: 'Berhasil menghapus dari favorit!',
+        toastThemeDark: 'Tema gelap diaktifkan!',
+        toastThemeLight: 'Tema terang diaktifkan!',
+        toastTagFilter: 'Memfilter tag:',
+        internetSearchFallback: "Aset tidak ditemukan. Cari '{query}' di internet?",
+        internetSearchFallbackAction: 'Cari di Internet',
+        internetSearchFallbackDescription: 'Klik untuk membuka hasil pencarian relevan di web.',
+        inspireButton: 'Inspirasi Acak',
+        exportFavorites: 'Ekspor Favorit',
+        importFavorites: 'Impor Favorit',
+        importSuccess: 'Favorit berhasil diimpor!',
+        exportSuccess: 'Favorit berhasil diekspor!',
+        reportBrokenLink: 'Laporkan Link Rusak',
+        openingEmail: 'Membuka Email...',
+        frequentlyVisited: 'Sering Kamu Kunjungi',
+        frequentlyVisitedSubtitle: 'Aset yang paling sering kamu buka dan kunjungi.',
+        inspireToast: 'Ini aset acak untuk inspirasimu!',
+        levelUpToast: 'LEVEL UP! Kamu sekarang adalah {badge} Level {level}!',
+        categoryLabels: {
+          All: 'Semua',
+          '3D Models': '3D Models',
+          Textures: 'Textures',
+          'SFX/Music': 'SFX/Music',
+          Fonts: 'Fonts',
+          'Photos/Vectors': 'Photos/Vectors',
+          Favorites: 'Favorit Saya'
+        }
+      },
+      en: {
+        headerSubtitle: 'Curated Free Assets',
+        headerTitle: "The Creator's Toolbox",
+        headerDescription: 'A curated collection of free resources for creators: models, textures, audio, fonts, and high-quality images in one browsable view.',
+        suggestButton: 'Suggest an Asset?',
+        themeDark: 'Dark',
+        themeLight: 'Light',
+        searchLabel: 'Search by title, category, tag, or description',
+        searchPlaceholder: 'Search assets...',
+        suggestTitle: 'Asset Name',
+        suggestCategory: 'Category',
+        suggestLink: 'Asset Link',
+        suggestNotes: 'Short notes',
+        suggestSubmit: 'Send Suggestion',
+        suggestCancel: 'Cancel',
+        suggestSuccess: 'Thanks! Your suggestion is noted and an email draft is being opened.',
+        noResults: 'No assets match the filters or search.',
+        showingAssets: 'Showing {count} assets',
+        visitCount: '{count} visits',
+        visitSite: 'Visit Site',
+        favoriteAdd: 'Add to favorites',
+        favoriteRemove: 'Remove from favorites',
+        copyLink: 'Copy Link',
+        copiedLink: 'Link copied to clipboard!',
+        copyFailed: 'Unable to copy link.',
+        popularityLabel: 'Popularity',
+        toastFavoriteAdded: 'Added to favorites!',
+        toastFavoriteRemoved: 'Removed from favorites!',
+        toastThemeDark: 'Dark mode enabled!',
+        toastThemeLight: 'Light mode enabled!',
+        toastTagFilter: 'Filtering by tag:',
+        internetSearchFallback: "Asset not found. Search for '{query}' on the internet?",
+        internetSearchFallbackAction: 'Search the Internet',
+        internetSearchFallbackDescription: 'Click here to open relevant web search results.',
+        inspireButton: 'Inspire Me!',
+        exportFavorites: 'Export Favorites',
+        importFavorites: 'Import Favorites',
+        importSuccess: 'Favorites imported successfully!',
+        exportSuccess: 'Favorites exported successfully!',
+        reportBrokenLink: 'Report Broken Link',
+        openingEmail: 'Opening Email...',
+        frequentlyVisited: 'Frequently Visited',
+        frequentlyVisitedSubtitle: 'Assets you open and visit most often.',
+        inspireToast: 'Here is a random asset for inspiration!',
+        levelUpToast: 'LEVEL UP! You\'re now {badge} Level {level}!',
+        categoryLabels: {
+          All: 'All',
+          '3D Models': '3D Models',
+          Textures: 'Textures',
+          'SFX/Music': 'SFX/Music',
+          Fonts: 'Fonts',
+          'Photos/Vectors': 'Photos/Vectors',
+          Favorites: 'My Favorites'
+        }
+      }
+    };
+
+    const icons = {
+      heart: filled => `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${filled ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.7" class="h-5 w-5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.35-1.93-4.25-4.31-4.25-1.72 0-3.2 1-3.89 2.43A4.3 4.3 0 0 0 8.91 4C6.51 4 4.5 5.9 4.5 8.25c0 6.12 7.5 10.5 7.5 10.5s9-4.38 9-10.5Z" />
+        </svg>
+      `,
+      spark: `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.75 8.2 8.2 3.75 9.75l4.45 1.55 1.55 4.45 1.55-4.45 4.45-1.55-4.45-1.55-1.55-4.45Zm7.5 6 1.05 3 3 1.05-3 1.05-1.05 3-1.05-3-3-1.05 3-1.05 1.05-3Z" />
+        </svg>
+      `,
+      search: `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-7 w-7" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.4a7.25 7.25 0 1 1-14.5 0 7.25 7.25 0 0 1 14.5 0Z" />
+        </svg>
+      `,
+      arrowTopRight: `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 16.5 16.5 7.5M9 7.5h9v9" />
+        </svg>
+      `
+    };
+
+    const searchTranslationMap = {
+      mobil: 'car',
+      rumah: 'house',
+      pedang: 'sword',
+      pohon: 'tree',
+      musik: 'music',
+      lagu: 'music',
+      suara: 'sound',
+      font: 'font',
+      gratis: 'free',
+      foto: 'photo',
+      gambar: 'image',
+      pemain: 'player',
+      kendaraan: 'vehicle',
+      bangunan: 'building'
+    };
+
+    const categorySearchMap = {
+      All: 'assets',
+      '3D Models': '3d models',
+      Textures: 'textures',
+      'SFX/Music': 'sound effects',
+      Fonts: 'fonts',
+      'Photos/Vectors': 'photos vectors'
+    };
+
+    function t(key, replacements = {}) {
+      let text = (locales[currentLang] && locales[currentLang][key]) || locales.id[key] || '';
+      Object.entries(replacements).forEach(([replacementKey, replacementValue]) => {
+        text = text.replace(`{${replacementKey}}`, replacementValue);
+      });
+      return text;
+    }
+
+    function getLocalizedValue(value, fallback = '') {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return value[currentLang] || value.id || value.en || Object.values(value).find(Boolean) || fallback;
+      }
+      return value || fallback;
+    }
+
+    function getAssetField(asset, fieldName, fallback = '') {
+      if (!asset || typeof asset !== 'object') return fallback;
+      const value = asset[fieldName];
+      const camelLangField = `${fieldName}${currentLang.charAt(0).toUpperCase()}${currentLang.slice(1)}`;
+      const snakeLangField = `${fieldName}_${currentLang}`;
+      const fallbackCamel = `${fieldName}Id`;
+      const fallbackSnake = `${fieldName}_id`;
+      return getLocalizedValue(
+        value ?? asset[camelLangField] ?? asset[snakeLangField] ?? asset[fallbackCamel] ?? asset[fallbackSnake],
+        fallback
+      );
+    }
+
+    function getAssetCategoryKey(asset) {
+      const rawCategory = asset?.category;
+      if (rawCategory && typeof rawCategory === 'object' && !Array.isArray(rawCategory)) {
+        return rawCategory.key || rawCategory.id || rawCategory.en || 'All';
+      }
+      return rawCategory || 'All';
+    }
+
+    function getAssetCategoryLabel(asset) {
+      const categoryValue = asset?.category;
+      if (categoryValue && typeof categoryValue === 'object' && !Array.isArray(categoryValue)) {
+        return getLocalizedValue(categoryValue, categoryValue.key || 'All');
+      }
+      const categoryKey = getAssetCategoryKey(asset);
+      const L = locales[currentLang] || locales.id;
+      return (L.categoryLabels && L.categoryLabels[categoryKey]) || categoryKey;
+    }
+
+    function getAssetSearchHaystack(asset) {
+      if (!asset || typeof asset !== 'object') return '';
+      const categoryKey = getAssetCategoryKey(asset);
+      return [
+        getAssetField(asset, 'title', ''),
+        getAssetField(asset, 'description', ''),
+        categoryKey,
+        getAssetCategoryLabel(asset),
+        asset.url || '',
+        ...(Array.isArray(asset.tags) ? asset.tags : [])
+      ].join(' ').toLowerCase();
+    }
+
+    function assetMatchesCategory(asset, category) {
+      if (category === 'All') return true;
+      if (category === 'Favorites') return isFavorite(asset.id);
+      return getAssetCategoryKey(asset) === category;
+    }
+
+    function renderThemeToggle(isDark) {
+      const L = locales[currentLang] || locales.id;
+      themeToggle.innerHTML = `
+        <span class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="${isDark ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="h-4 w-4" aria-hidden="true">
+            ${isDark
+              ? '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21m9-9h-2.25M5.25 12H3m15.36-6.36-1.6 1.6M7.24 16.76l-1.6 1.6m12.72 0-1.6-1.6M7.24 7.24l-1.6-1.6M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />'
+              : '<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 14.75A8.25 8.25 0 0 1 9.25 3.25 8.25 8.25 0 1 0 21.75 14.75Z" />'}
+          </svg>
+          ${isDark ? L.themeLight : L.themeDark}
+        </span>
+      `;
+    }
+
+    function buildSearchQuery(term, category = 'All') {
+      const raw = String(term || '').trim().toLowerCase();
+      const selectedCategory = category || 'All';
+      if (!raw) {
+        return 'game assets';
+      }
+
+      const words = raw.split(/\s+/).map(word => {
+        const cleanWord = word.startsWith('#') ? word.slice(1) : word;
+        return searchTranslationMap[cleanWord] || cleanWord;
+      });
+      const normalizedWords = [...new Set(words)];
+      const hasAssetWord = normalizedWords.some(word => /asset/.test(word));
+      const categoryPhrase = categorySearchMap[selectedCategory] || selectedCategory.toLowerCase().replace(/\s*\/\s*/g, ' ');
+      const parts = [];
+      if (!normalizedWords.includes('free')) {
+        parts.push('free');
+      }
+      parts.push(...normalizedWords);
+      if (selectedCategory !== 'All') {
+        parts.push(categoryPhrase);
+      }
+      if (!hasAssetWord) {
+        parts.push('assets');
+      }
+      return parts.join(' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function buildExternalSearchUrl(term, category = 'All') {
+      const query = buildSearchQuery(term, category);
+      return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    }
+
+    function loadClickCounts() {
+      try {
+        const raw = localStorage.getItem(CLICK_COUNT_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveClickCounts() {
+      localStorage.setItem(CLICK_COUNT_STORAGE_KEY, JSON.stringify(clickCounts));
+    }
+
+    function incrementClickCount(assetId) {
+      if (!assetId) return;
+      clickCounts[assetId] = (clickCounts[assetId] || 0) + 1;
+      saveClickCounts();
+      renderFrequentlyVisited();
+    }
+
+    function getTopVisitedAssets(limit = 4) {
+      return resourceAssets
+        .filter(asset => asset && asset.id != null && (clickCounts[asset.id] || 0) >= 2)
+        .sort((a, b) => (clickCounts[b.id] || 0) - (clickCounts[a.id] || 0))
+        .slice(0, limit);
+    }
+
+    function extractHashTags(value) {
+      return Array.from(new Set(
+        String(value || '')
+          .toLowerCase()
+          .match(/#([^\s#]+)/g)?.map(tag => tag.slice(1)) || []
+      ));
+    }
+
+    function addTagToSearch(tag) {
+      const current = searchInput.value.trim();
+      const normalized = current.replace(/\s+/g, ' ');
+      const tagText = `#${tag}`;
+      if (normalized.toLowerCase().includes(tagText.toLowerCase())) {
+        return;
+      }
+      searchInput.value = `${normalized}${normalized ? ' ' : ''}${tagText}`.trim();
+      searchTerm = searchInput.value;
+      updateView();
+    }
+
+    function renderTagCloud() {
+      miniTagCloud.innerHTML = '';
+      const tagCounts = {};
+      resourceAssets.forEach(asset => {
+        if (!Array.isArray(asset.tags)) return;
+        asset.tags.forEach(tag => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
+      });
+      const topTags = Object.entries(tagCounts)
+        .sort(([, aCount], [, bCount]) => bCount - aCount)
+        .slice(0, 5)
+        .map(([tag]) => tag);
+
+      topTags.forEach(tag => {
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.dataset.tag = tag;
+        pill.className = 'inline-flex rounded-full border border-slate-300 bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10';
+        pill.textContent = `#${tag}`;
+        miniTagCloud.appendChild(pill);
+      });
+    }
+
+    function renderFrequentlyVisited() {
+      const assets = getTopVisitedAssets(4);
+      if (!assets.length) {
+        frequentlyVisitedSection.classList.add('hidden');
+        return;
+      }
+
+      frequentlyVisitedSection.classList.remove('hidden');
+      frequentlyVisitedTitle.textContent = t('frequentlyVisited');
+      frequentlyVisitedSubtitle.textContent = t('frequentlyVisitedSubtitle');
+      frequentlyVisitedList.innerHTML = '';
+
+      assets.forEach(asset => {
+        const count = clickCounts[asset.id] || 0;
+        const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+        const assetCategory = getAssetCategoryLabel(asset);
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.dataset.assetId = asset.id;
+        item.className = 'min-w-[220px] shrink-0 rounded-[1.5rem] border border-white/70 bg-white/75 p-4 text-left shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-accent-light hover:bg-accent-lighter/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:text-slate-100 dark:hover:border-accent dark:hover:bg-accent/10';
+        item.innerHTML = `
+          <div class="mb-3 flex items-center gap-3">
+            <div class="h-12 w-12 overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800">
+              <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="${assetTitle}" class="h-full w-full object-cover" />
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-slate-900 dark:text-slate-50">${assetTitle}</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">${t('visitCount', { count })}</p>
+            </div>
+          </div>
+          <p class="text-sm text-slate-600 dark:text-slate-400">${assetCategory}</p>
+        `;
+        frequentlyVisitedList.appendChild(item);
+      });
+    }
+
+    let currentLang = localStorage.getItem(LANG_STORAGE_KEY) || 'id';
+
+    function applyLanguage(lang) {
+      const L = locales[lang] || locales.id;
+      currentLang = locales[lang] ? lang : 'id';
+      document.documentElement.lang = currentLang;
+      // header
+      const headerSubtitle = document.querySelector('header p.text-sm');
+      const headerTitle = document.querySelector('header h1');
+      const headerDescription = document.querySelector('header p.mt-4');
+      if (headerSubtitle) headerSubtitle.textContent = L.headerSubtitle;
+      if (headerTitle) headerTitle.textContent = L.headerTitle;
+      if (headerDescription) headerDescription.textContent = L.headerDescription;
+
+      // buttons and labels
+      document.getElementById('suggestButton').textContent = L.suggestButton;
+      document.getElementById('inspireButton').textContent = L.inspireButton;
+      document.getElementById('exportFavoritesBtn').textContent = L.exportFavorites;
+      document.getElementById('importFavoritesBtn').textContent = L.importFavorites;
+      renderThemeToggle(document.documentElement.classList.contains('dark'));
+      document.getElementById('searchLabel').textContent = L.searchLabel;
+      searchInput.placeholder = L.searchPlaceholder;
+      frequentlyVisitedTitle.textContent = L.frequentlyVisited;
+      frequentlyVisitedSubtitle.textContent = L.frequentlyVisitedSubtitle;
+      categoryButtons.forEach(button => {
+        const category = button.dataset.category || 'All';
+        button.textContent = (L.categoryLabels && L.categoryLabels[category]) || category;
+      });
+
+      document.getElementById('labelAssetName').textContent = L.suggestTitle;
+      document.getElementById('labelCategory').textContent = L.suggestCategory;
+      document.getElementById('labelLink').textContent = L.suggestLink;
+      document.getElementById('labelNotes').textContent = L.suggestNotes;
+      document.querySelector('#suggestForm button[type="submit"]').textContent = L.suggestSubmit;
+      document.getElementById('cancelForm').textContent = L.suggestCancel;
+      suggestSuccess.textContent = L.suggestSuccess;
+
+      localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+      updateActiveCategoryButton(activeCategory);
+      updateView();
+    }
+
+    let filterControlsReady = false;
+
+    function buildFilterControls() {
+      const searchFilterControls = document.getElementById('searchFilterControls');
+      if (!searchFilterControls) return;
+
+      sortSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
+      sortSelect.innerHTML = `
+        <option value="best">Best match</option>
+        <option value="popular">Most popular</option>
+        <option value="newest">Newest</option>
+        <option value="favorites">Favorites first</option>
+      `;
+      sortSelect.value = activeSort;
+
+      tagSelect.className = 'h-11 w-full min-w-0 rounded-full border border-slate-300 bg-slate-50 px-3 text-sm font-semibold text-slate-700 outline-none transition-all duration-300 ease-in-out hover:border-accent-light focus:border-accent focus:ring-2 focus:ring-accent-light dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200';
+      tagSelect.innerHTML = `<option value="All">All tags</option>`;
+
+      if (!filterControlsReady) {
+        searchFilterControls.appendChild(sortSelect);
+        searchFilterControls.appendChild(tagSelect);
+
+        sortSelect.addEventListener('change', e => {
+          activeSort = e.target.value;
+          localStorage.setItem(SORT_STORAGE_KEY, activeSort);
+          updateView();
+        });
+
+        tagSelect.addEventListener('change', e => {
+          activeTag = e.target.value;
+          localStorage.setItem(TAG_STORAGE_KEY, activeTag);
+          updateView();
+        });
+
+        filterControlsReady = true;
+      }
+    }
+
+    function populateTagOptions() {
+      const tagCounts = {};
+      resourceAssets.forEach(a => {
+        if (!Array.isArray(a.tags)) return;
+        a.tags.forEach(t => {
+          tagCounts[t] = (tagCounts[t] || 0) + 1;
+        });
+      });
+      const tags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+      // add top 20 tags
+      tags.slice(0, 20).forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = `#${t}`;
+        tagSelect.appendChild(opt);
+      });
+      // restore selection
+      if (activeTag) tagSelect.value = activeTag;
+    }
+
+    function loadFavorites() {
+      try {
+        const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveFavorites() {
+      localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify([...favorites]));
+    }
+
+    function isFavorite(assetId) {
+      return favorites.has(assetId);
+    }
+
+    function toggleFavorite(assetId) {
+      const wasFavorite = favorites.has(assetId);
+      if (wasFavorite) {
+        favorites.delete(assetId);
+      } else {
+        favorites.add(assetId);
+        addXp(15);
+      }
+      saveFavorites();
+      showToast(wasFavorite ? locales[currentLang].toastFavoriteRemoved : locales[currentLang].toastFavoriteAdded);
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme;
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme, options = {}) {
+      const { silent = false } = options;
+      const isDark = theme === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      document.body.classList.toggle('dark', isDark);
+      const L = locales[currentLang] || locales.id;
+      renderThemeToggle(isDark);
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+      if (!silent) {
+        showToast(isDark ? L.toastThemeDark : L.toastThemeLight);
+      }
+    }
+
+    function loadSuggestions() {
+      try {
+        const raw = localStorage.getItem(SUGGESTIONS_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveSuggestions() {
+      localStorage.setItem(SUGGESTIONS_STORAGE_KEY, JSON.stringify(suggestions));
+    }
+
+    const toastContainer = document.createElement('div');
+    toastContainer.id = 'toastContainer';
+    toastContainer.className = 'pointer-events-none fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 p-2';
+    document.body.appendChild(toastContainer);
+
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto max-w-sm rounded-3xl border border-slate-200/80 bg-white/95 px-4 py-3 text-sm font-medium text-slate-900 shadow-xl shadow-slate-950/10 backdrop-blur-xl transition-all duration-300 ease-out opacity-0 translate-y-2 dark:border-slate-700/80 dark:bg-slate-950/95 dark:text-slate-100';
+      toast.textContent = message;
+      toastContainer.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('opacity-0', 'translate-y-2');
+      });
+
+      window.setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        window.setTimeout(() => toast.remove(), 300);
+      }, TOAST_TIMEOUT);
+    }
+
+    function createDetailModal() {
+      detailModal = document.createElement('div');
+      detailModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm';
+      detailModal.innerHTML = `
+        <div class="relative w-full max-w-3xl overflow-hidden rounded-[2rem] bg-white shadow-2xl transition duration-300 dark:bg-slate-950">
+          <button type="button" id="detailCloseBtn" class="absolute right-4 top-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-2xl text-slate-900 shadow-md transition hover:bg-slate-100 dark:bg-slate-900/90 dark:text-slate-100 dark:hover:bg-slate-800">×</button>
+          <div class="grid gap-6 p-6 md:grid-cols-[1.25fr_1fr]">
+            <div class="overflow-hidden rounded-[1.5rem] bg-slate-100 dark:bg-slate-900">
+              <img id="detailModalImage" src="${PLACEHOLDER_IMAGE}" alt="Asset preview" class="h-full min-h-[320px] w-full object-cover" />
+            </div>
+            <div class="flex flex-col gap-4">
+              <div>
+                <span id="detailModalCategory" class="inline-flex rounded-full bg-accent-light px-3 py-1 text-sm font-semibold text-accent-dark dark:bg-accent/15 dark:text-accent-light"></span>
+                <h3 id="detailModalTitle" class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-50"></h3>
+              </div>
+              <p id="detailModalDescription" class="text-sm leading-7 text-slate-600 dark:text-slate-300"></p>
+              <div id="detailModalTags" class="flex flex-wrap gap-2"></div>
+              <div class="mt-auto space-y-3">
+                <a id="detailModalVisit" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-md shadow-accent/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-lg">${locales[currentLang].visitSite}</a>
+                <button id="detailModalCopy" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-accent-lighter hover:shadow-md dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-accent/10">${locales[currentLang].copyLink}</button>
+                <button id="detailBrokenLinkBtn" type="button" class="inline-flex w-full items-center justify-center rounded-full border border-rose-500 bg-rose-50 px-5 py-3 text-sm font-semibold text-rose-700 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-rose-100 hover:shadow-md dark:border-rose-400/30 dark:bg-rose-500/10 dark:text-rose-200 dark:hover:bg-rose-500/20">${locales[currentLang].reportBrokenLink}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(detailModal);
+      detailModal.querySelector('#detailCloseBtn').addEventListener('click', closeDetailModal);
+      detailModal.querySelector('#detailModalCopy').addEventListener('click', event => {
+        const url = event.currentTarget.dataset.url;
+        if (!url) return;
+        navigator.clipboard.writeText(url).then(() => {
+          showToast(t('copiedLink'));
+        }).catch(() => {
+          showToast(t('copyFailed'));
+        });
+      });
+      detailModal.addEventListener('click', event => {
+        if (event.target === detailModal) {
+          closeDetailModal();
+        }
+      });
+    }
+
+    function createInternetSearchFallbackCard(searchValue) {
+      const currentCategory = activeCategory || 'All';
+      const query = buildSearchQuery(searchValue, currentCategory);
+      const card = document.createElement('article');
+      card.className = 'col-span-full cursor-pointer overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-slate-100 to-accent-lighter p-6 text-left text-slate-900 shadow-xl shadow-slate-400/10 transition duration-300 hover:-translate-y-1 hover:border-accent-light hover:shadow-2xl dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100 dark:hover:border-accent';
+      card.innerHTML = `
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div class="flex items-start gap-4">
+            <div class="flex h-16 w-16 items-center justify-center rounded-3xl bg-accent text-white shadow-lg shadow-accent/20">${icons.search}</div>
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.35em] text-accent-dark dark:text-accent-light">${t('internetSearchFallbackAction').toUpperCase()}</p>
+              <h3 class="mt-4 text-2xl font-semibold text-slate-900 dark:text-slate-50">${t('internetSearchFallback', { query })}</h3>
+              <p class="mt-3 max-w-xl text-sm leading-7 text-slate-600 dark:text-slate-400">${t('internetSearchFallbackDescription')}</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-start gap-3 sm:items-end">
+            <span class="rounded-full bg-slate-900/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white shadow-sm dark:bg-white/10 dark:text-slate-100">${currentCategory === 'All' ? 'All Assets' : currentCategory}</span>
+            <button class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-accent dark:bg-accent dark:hover:bg-accent-dark">
+              ${t('internetSearchFallbackAction')}
+            </button>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        window.open(buildExternalSearchUrl(searchValue, currentCategory), '_blank');
+      });
+      return card;
+    }
+
+    function setActiveTag(tag) {
+      activeTag = tag;
+      localStorage.setItem(TAG_STORAGE_KEY, activeTag);
+      tagSelect.value = activeTag;
+      showToast(`${locales[currentLang].toastTagFilter} ${tag}`);
+      updateView();
+    }
+
+    function openDetailModal(asset) {
+      if (!detailModal) return;
+      const image = detailModal.querySelector('#detailModalImage');
+      const title = detailModal.querySelector('#detailModalTitle');
+      const category = detailModal.querySelector('#detailModalCategory');
+      const description = detailModal.querySelector('#detailModalDescription');
+      const tagsContainer = detailModal.querySelector('#detailModalTags');
+      const visitButton = detailModal.querySelector('#detailModalVisit');
+      const copyButton = detailModal.querySelector('#detailModalCopy');
+      const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+      const assetDescription = getAssetField(asset, 'description', '');
+      const assetCategory = getAssetCategoryLabel(asset);
+
+      image.src = asset.imageUrl || PLACEHOLDER_IMAGE;
+      image.alt = `Preview ${assetTitle}`;
+      title.textContent = assetTitle;
+      category.textContent = assetCategory;
+      description.textContent = assetDescription;
+      visitButton.href = asset.url;
+      visitButton.innerHTML = `${locales[currentLang].visitSite} ${icons.arrowTopRight}`;
+      copyButton.textContent = locales[currentLang].copyLink;
+      copyButton.dataset.url = asset.url || '';
+
+      tagsContainer.innerHTML = '';
+      (Array.isArray(asset.tags) ? asset.tags : []).forEach(tag => {
+        const tagButton = document.createElement('button');
+        tagButton.type = 'button';
+        tagButton.className = 'rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600 transition hover:bg-accent-lighter hover:text-accent-dark dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-accent/15 dark:hover:text-accent-light';
+        tagButton.textContent = `#${tag}`;
+        tagButton.addEventListener('click', () => setActiveTag(tag));
+        tagsContainer.appendChild(tagButton);
+      });
+
+      if (asset.id) {
+        awardAssetXp(asset.id);
+        incrementClickCount(asset.id);
+      }
+
+      detailModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetailModal() {
+      if (!detailModal) return;
+      detailModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function openModal() {
+      suggestModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalDialog() {
+      suggestModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      suggestSuccess.classList.add('hidden');
+      suggestForm.reset();
+    }
+
+    function showSuggestionMessage() {
+      suggestSuccess.classList.remove('hidden');
+      setTimeout(() => suggestSuccess.classList.add('hidden'), 4000);
+    }
+
+    function handleSuggestionSubmit(event) {
+      event.preventDefault();
+      const newSuggestion = {
+        id: Date.now(),
+        title: suggestTitle.value.trim(),
+        category: suggestCategory.value,
+        url: suggestUrl.value.trim(),
+        notes: suggestNotes.value.trim(),
+        createdAt: new Date().toISOString()
+      };
+
+      if (!newSuggestion.title || !newSuggestion.url) {
+        return;
+      }
+
+      suggestions.push(newSuggestion);
+      saveSuggestions();
+
+      const subject = encodeURIComponent(`Saran Aset Baru: ${newSuggestion.title}`);
+      const body = encodeURIComponent(
+        `Judul Aset: ${newSuggestion.title}\nKategori: ${newSuggestion.category}\nLink: ${newSuggestion.url}\nCatatan: ${newSuggestion.notes || '-'}\n\nTerima kasih!`
+      );
+
+      showSuggestionMessage();
+      showToast(locales[currentLang].suggestSuccess);
+      suggestForm.reset();
+      window.location.href = `mailto:${SUGGESTION_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    function createAssetCard(asset) {
+      const card = document.createElement('article');
+      const favorited = isFavorite(asset.id);
+      const L = locales[currentLang] || locales.id;
+      const isListMode = activeLayout === 'list';
+      const favoriteLabel = favorited ? L.favoriteRemove : L.favoriteAdd;
+      const assetTitle = getAssetField(asset, 'title', 'Untitled asset');
+      const assetDescription = getAssetField(asset, 'description', '');
+      const assetCategory = getAssetCategoryLabel(asset);
+      card.dataset.assetCardId = asset.id;
+
+      if (isListMode) {
+        card.className = 'group flex cursor-pointer items-center gap-4 rounded-[1rem] border border-white/70 bg-white/75 p-3 shadow-md shadow-slate-200/40 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-accent-light hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:hover:bg-slate-900/90';
+        card.innerHTML = `
+          <div class="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-900">
+            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${assetTitle}" class="h-full w-full object-cover" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
+          </div>
+          <div class="min-w-0 flex-grow">
+            <h3 class="text-sm font-semibold text-slate-900 truncate dark:text-slate-50">${assetTitle}</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400">${assetCategory}</p>
+          </div>
+          <div class="flex-shrink-0 flex items-center gap-2">
+            <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-md" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
+            <button type="button" aria-label="${favoriteLabel}" title="${favoriteLabel}" data-asset-id="${asset.id}" class="favorite-btn inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-300 ${favorited ? 'bg-rose-50 text-rose-500 dark:bg-rose-500/10' : 'text-slate-500 dark:text-slate-300'} transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-100 hover:text-rose-500 hover:shadow-md dark:border-slate-700 dark:hover:bg-rose-500/15">${icons.heart(favorited)}</button>
+          </div>
+        `;
+      } else {
+        card.className = 'group cursor-pointer rounded-[1.75rem] border border-white/70 bg-white/75 p-0 shadow-md shadow-slate-200/50 backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-accent-light hover:bg-white/90 hover:shadow-xl dark:border-slate-700/70 dark:bg-slate-950/70 dark:shadow-slate-950/40 dark:hover:bg-slate-900/90';
+        card.innerHTML = `
+          <div class="relative overflow-hidden rounded-t-[1.75rem] bg-slate-100 dark:bg-slate-900">
+            <img src="${asset.imageUrl || PLACEHOLDER_IMAGE}" alt="Preview ${assetTitle}" class="h-52 w-full object-cover transition duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}';" />
+            <div class="absolute left-4 top-4 flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-xs font-semibold text-slate-800 shadow-sm backdrop-blur-xl dark:border-slate-700/70 dark:bg-slate-800/80 dark:text-slate-100" aria-label="${L.popularityLabel}: ${asset.popularity || 0}">${icons.spark}${asset.popularity || 0}</span>
+            </div>
+            <button type="button" aria-label="${favoriteLabel}" title="${favoriteLabel}" data-asset-id="${asset.id}" class="favorite-btn absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/80 bg-white/85 ${favorited ? 'text-rose-500' : 'text-slate-700 dark:text-slate-100'} shadow-md backdrop-blur-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-rose-100 hover:text-rose-500 hover:shadow-lg dark:border-slate-700/70 dark:bg-slate-950/80 dark:hover:bg-rose-500/15">${icons.heart(favorited)}</button>
+          </div>
+          <div class="p-6">
+            <div class="mb-4 flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h2 class="text-xl font-semibold text-slate-900 transition group-hover:text-accent dark:text-slate-50">${assetTitle}</h2>
+                <p class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">${assetDescription}</p>
+              </div>
+              <span class="whitespace-nowrap rounded-full bg-accent-light px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent-dark dark:bg-accent/15 dark:text-accent-light">${assetCategory}</span>
+            </div>
+            <div class="mb-5 flex flex-wrap gap-2">
+              ${Array.isArray(asset.tags) ? asset.tags.map(tag => `<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">#${tag}</span>`).join('') : ''}
+            </div>
+            <div class="flex items-center justify-between gap-3">
+              <a href="${asset.url}" target="_blank" rel="noopener noreferrer" class="asset-link inline-flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-md shadow-accent/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-accent-dark hover:shadow-lg" data-asset-id="${asset.id}">${L.visitSite}${icons.arrowTopRight}</a>
+            </div>
+          </div>
+        `;
+      }
+
+      return card;
+    }
+
+    function filterAssets(assets) {
+      const normalizedSearch = searchTerm.trim().toLowerCase();
+      const allTerms = normalizedSearch.split(/\s+/).filter(Boolean);
+      const searchTags = allTerms.filter(term => term.startsWith('#')).map(tag => tag.slice(1));
+      const textTerms = allTerms.filter(term => !term.startsWith('#'));
+      const activeTags = new Set(searchTags.map(tag => tag.toLowerCase()));
+      if (activeTag !== 'All') {
+        activeTags.add(activeTag.toLowerCase());
+      }
+
+      if (!Array.isArray(assets)) {
+        return [];
+      }
+
+      // when there's no search term and no hashtag filter, show favorites first then sort according to activeSort
+      if (!allTerms.length && activeTag === 'All') {
+        return assets
+          .filter(asset => {
+            const matchesCategory = assetMatchesCategory(asset, activeCategory);
+            const matchesTag = activeTag === 'All' || (Array.isArray(asset.tags) && asset.tags.includes(activeTag));
+            return matchesCategory && matchesTag;
+          })
+          .sort((a, b) => {
+            const favA = isFavorite(a.id) ? 1 : 0;
+            const favB = isFavorite(b.id) ? 1 : 0;
+            if (favA !== favB) return favB - favA; // favorites first
+
+            if (activeSort === 'popular') {
+              const popA = a.popularity || 0;
+              const popB = b.popularity || 0;
+              if (popB !== popA) return popB - popA;
+            } else if (activeSort === 'newest') {
+              if ((b.id || 0) !== (a.id || 0)) return (b.id || 0) - (a.id || 0);
+            }
+
+            // default: alphabetical
+            return getAssetField(a, 'title', '').localeCompare(getAssetField(b, 'title', ''));
+          });
+      }
+
+      return assets
+        .map(asset => {
+          if (!asset || typeof asset !== 'object') {
+            return null;
+          }
+
+          if (!assetMatchesCategory(asset, activeCategory)) {
+            return null;
+          }
+
+          const haystack = getAssetSearchHaystack(asset);
+
+          const matchesAll = textTerms.every(term => haystack.includes(term));
+          if (!matchesAll) {
+            return null;
+          }
+
+          const assetTags = Array.isArray(asset.tags) ? asset.tags.map(tag => tag.toLowerCase()) : [];
+          const tagsMatch = Array.from(activeTags).every(tag => assetTags.includes(tag));
+          if (!tagsMatch) {
+            return null;
+          }
+
+          const assetTitle = getAssetField(asset, 'title', '').toLowerCase();
+          const assetDescription = getAssetField(asset, 'description', '').toLowerCase();
+          const categoryKey = getAssetCategoryKey(asset).toLowerCase();
+          const categoryLabel = getAssetCategoryLabel(asset).toLowerCase();
+
+          let score = 0;
+          const fullSearch = normalizedSearch;
+          if (assetTitle.includes(fullSearch)) score += 80;
+          if (assetDescription.includes(fullSearch)) score += 30;
+
+          textTerms.forEach(term => {
+            if (assetTitle.includes(term)) score += 30;
+            if (assetDescription.includes(term)) score += 10;
+            if (categoryKey.includes(term) || categoryLabel.includes(term)) score += 6;
+            if ((asset.url || '').toLowerCase().includes(term)) score += 4;
+            if (Array.isArray(asset.tags) && asset.tags.some(tag => String(tag).toLowerCase().includes(term))) score += 15;
+          });
+
+          // add popularity as a tiebreaker
+          score += Math.round((asset.popularity || 0) / 5); // 0..20
+
+          // boost favorites strongly so they bubble to top when relevant
+          if (isFavorite(asset.id)) {
+            score += 50;
+          }
+
+          return { asset, score };
+        })
+        .filter(Boolean)
+        .sort((a, b) => {
+          // primary sorting depends on activeSort
+          if (activeSort === 'popular') {
+            const popDiff = (b.asset.popularity || 0) - (a.asset.popularity || 0);
+            if (popDiff !== 0) return popDiff;
+          }
+          if (activeSort === 'newest') {
+            const idDiff = (b.asset.id || 0) - (a.asset.id || 0);
+            if (idDiff !== 0) return idDiff;
+          }
+          // default: score descending
+          return b.score - a.score;
+        })
+        .map(result => result.asset)
+        .filter(asset => {
+          // apply tag filter to final list
+          if (activeTag === 'All') return true;
+          return Array.isArray(asset.tags) && asset.tags.includes(activeTag);
+        });
+    }
+
+    function renderAssets(assets) {
+      assetGrid.innerHTML = '';
+      
+      // Apply layout class
+      if (activeLayout === 'list') {
+        assetGrid.className = 'space-y-2 transition-all duration-300';
+      } else {
+        assetGrid.className = 'grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 transition-all duration-300';
+      }
+
+      if (!Array.isArray(assets) || assets.length === 0) {
+        if (searchTerm.trim()) {
+          assetGrid.appendChild(createInternetSearchFallbackCard(searchTerm));
+          return;
+        }
+
+        const message = document.createElement('div');
+        message.className = 'col-span-full rounded-[1.75rem] border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-slate-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400';
+        message.textContent = (locales[currentLang] || locales.id).noResults;
+        assetGrid.appendChild(message);
+        return;
+      }
+
+      assets.forEach(asset => {
+        const card = createAssetCard(asset);
+        assetGrid.appendChild(card);
+      });
+    }
+
+    function updateActiveCategoryButton(category) {
+      categoryButtons.forEach(button => {
+        const isActive = button.dataset.category === category;
+        button.classList.add('transition-all', 'duration-300', 'ease-in-out');
+        button.classList.toggle('bg-accent', isActive);
+        button.classList.toggle('border-accent', isActive);
+        button.classList.toggle('text-white', isActive);
+        button.classList.toggle('shadow-md', isActive);
+        button.classList.toggle('hover:-translate-y-0.5', !isActive);
+        button.classList.toggle('border-slate-300', !isActive);
+        button.classList.toggle('bg-slate-50', !isActive);
+        button.classList.toggle('text-slate-700', !isActive);
+      });
+    }
+
+    function updateView() {
+      const filtered = filterAssets(resourceAssets);
+      resultCount.textContent = t('showingAssets', { count: filtered.length });
+      renderAssets(filtered);
+      updateGamificationUI();
+    }
+
+    suggestButton.addEventListener('click', openModal);
+    closeModal.addEventListener('click', closeModalDialog);
+    cancelForm.addEventListener('click', closeModalDialog);
+    suggestModal.addEventListener('click', event => {
+      if (event.target === suggestModal) {
+        closeModalDialog();
+      }
+    });
+    suggestForm.addEventListener('submit', handleSuggestionSubmit);
+
+    miniTagCloud.addEventListener('click', event => {
+      const tagButton = event.target.closest('[data-tag]');
+      if (!tagButton) return;
+      addTagToSearch(tagButton.dataset.tag);
+    });
+
+    frequentlyVisitedList.addEventListener('click', event => {
+      const visitedButton = event.target.closest('[data-asset-id]');
+      if (!visitedButton) return;
+      const asset = assetsById.get(String(visitedButton.dataset.assetId));
+      if (asset) openDetailModal(asset);
+    });
+
+    assetGrid.addEventListener('click', event => {
+      const favoriteButton = event.target.closest('.favorite-btn');
+      if (favoriteButton) {
+        event.stopPropagation();
+        toggleFavorite(Number(favoriteButton.dataset.assetId));
+        updateView();
+        return;
+      }
+
+      const assetLink = event.target.closest('.asset-link');
+      if (assetLink) {
+        const assetId = Number(assetLink.dataset.assetId);
+        awardAssetXp(assetId);
+        incrementClickCount(assetId);
+        return;
+      }
+
+      const card = event.target.closest('[data-asset-card-id]');
+      if (!card) return;
+      const asset = assetsById.get(String(card.dataset.assetCardId));
+      if (asset) openDetailModal(asset);
+    });
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        activeCategory = button.dataset.category || 'All';
+        updateActiveCategoryButton(activeCategory);
+        updateView();
+      });
+    });
+
+    searchInput.addEventListener('input', event => {
+      searchTerm = event.target.value || '';
+      updateView();
+    });
+
+    // open on Enter key
+    searchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const filtered = filterAssets(resourceAssets);
+        const currentSearch = searchInput.value.trim();
+        if (Array.isArray(filtered) && filtered.length > 0) {
+          window.open(filtered[0].url, '_blank');
+        } else if (currentSearch) {
+          window.open(buildExternalSearchUrl(currentSearch, activeCategory), '_blank');
+        }
+      }
+    });
+
+    inspireButton.addEventListener('click', () => {
+      const randomAsset = resourceAssets[Math.floor(Math.random() * resourceAssets.length)];
+      if (randomAsset) {
+        openDetailModal(randomAsset);
+      }
+      addXp(5);
+      showToast(locales[currentLang].inspireToast);
+    });
+
+    exportFavoritesBtn.addEventListener('click', () => {
+      const payload = JSON.stringify([...favorites], null, 2);
+      const blob = new Blob([payload], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'creators-toolbox-favorites.json';
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+      addXp(20);
+      showToast(locales[currentLang].exportSuccess);
+    });
+
+    importFavoritesBtn.addEventListener('click', () => importFavoritesInput.click());
+    importFavoritesInput.addEventListener('change', event => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (Array.isArray(parsed)) {
+            favorites.clear();
+            parsed.forEach(id => favorites.add(id));
+            saveFavorites();
+            importFavoritesInput.value = '';
+            addXp(20);
+            showToast(locales[currentLang].importSuccess);
+            updateView();
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // language select
+    languageSelect.addEventListener('change', e => {
+      applyLanguage(e.target.value);
+      languageSelect.value = currentLang;
+    });
+
+    // Layout switcher event listeners
+    if (layoutGridBtn) {
+      layoutGridBtn.addEventListener('click', () => {
+        setLayout('grid');
+      });
+    }
+
+    if (layoutListBtn) {
+      layoutListBtn.addEventListener('click', () => {
+        setLayout('list');
+      });
+    }
+
+    // Accent color selector event listener
+    if (accentColorSelect) {
+      accentColorSelect.addEventListener('change', e => {
+        applyAccentColor(e.target.value);
+      });
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeDetailModal();
+        closeModalDialog();
+      }
+    });
+
+    function showBootError(message) {
+      const banner = document.createElement('div');
+      banner.id = 'bootErrorBanner';
+      banner.className = 'fixed inset-x-4 top-4 z-[100] rounded-2xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800 shadow-lg dark:border-rose-500/40 dark:bg-rose-950 dark:text-rose-100';
+      banner.textContent = message;
+      document.body.prepend(banner);
+    }
+
+    function bootApp() {
+      resourceAssets = getResourceAssets();
+      assetsById.clear();
+      resourceAssets.forEach(asset => assetsById.set(String(asset.id), asset));
+
+      if (!resourceAssets.length) {
+        showBootError('Data aset tidak termuat. Simpan file, lalu buka lewat server lokal: npm run dev → http://localhost:3000 (hindari double-click index.html).');
+        return;
+      }
+
+      document.getElementById('bootErrorBanner')?.remove();
+      buildFilterControls();
+      populateTagOptions();
+      if (!detailModal) createDetailModal();
+      applyLanguage(currentLang);
+      languageSelect.value = currentLang;
+      applyTheme(loadTheme(), { silent: true });
+      updateActiveCategoryButton(activeCategory);
+      applyAccentColor(activeAccent);
+      updateLayoutUI();
+      updateView();
+    }
+
+    // init (defer so data.js always finishes first)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootApp);
+    } else {
+      bootApp();
+    }
+  </script>
+</body>
+</html>
