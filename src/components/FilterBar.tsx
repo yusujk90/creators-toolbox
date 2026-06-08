@@ -1,10 +1,10 @@
-import { Box, Flex, Text, HStack, Input } from "@chakra-ui/react"
-import { LuSearch, LuLayoutGrid, LuList } from "react-icons/lu"
-import { Icon } from "@chakra-ui/react"
+import { Box, Flex, Text, HStack } from "@chakra-ui/react"
+import { LuLayoutGrid, LuList } from "react-icons/lu"
 import { useApp } from "@/context/AppContext"
 import { t, locales } from "@/lib/locales"
 import resourceAssets from "@/data/assets"
 import type { SortMode } from "@/context/AppContext"
+import { OmniboxSearch } from "@/components/OmniboxSearch"
 
 const CATEGORIES = ["All", "3D Models", "Textures", "SFX/Music", "Fonts", "Photos/Vectors", "Favorites"]
 
@@ -33,8 +33,6 @@ export function FilterBar({ onExport, onImport }: FilterBarProps) {
     lang,
     activeCategory,
     setActiveCategory,
-    searchTerm,
-    setSearchTerm,
     sortMode,
     setSortMode,
     activeTag,
@@ -116,41 +114,10 @@ export function FilterBar({ onExport, onImport }: FilterBarProps) {
         ))}
       </Flex>
 
-      {/* Search + Controls Row */}
+      {/* Omnibox + Controls Row */}
       <Flex direction={{ base: "column", md: "row" }} gap={3} align={{ md: "flex-end" }}>
         <Box flex={1}>
-          <Text fontSize="xs" fontWeight="medium" mb={2} color={isDark ? "gray.400" : "gray.500"}>
-            {t(lang, "searchLabel")}
-          </Text>
-          <Box position="relative">
-            <Box
-              position="absolute"
-              left={3}
-              top="50%"
-              transform="translateY(-50%)"
-              pointerEvents="none"
-              color={isDark ? "gray.500" : "gray.400"}
-            >
-              <Icon as={LuSearch} boxSize={4} />
-            </Box>
-            <Input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={t(lang, "searchPlaceholder")}
-              pl={10}
-              rounded="full"
-              style={{
-                background: isDark ? "rgba(255,255,255,0.05)" : "#f8fafc",
-                border: `1px solid ${isDark ? "rgba(255,255,255,0.1)" : "#e2e8f0"}`,
-                color: isDark ? "#f1f5f9" : "#0f172a",
-              }}
-              _focus={{
-                borderColor: accentVars["--accent"],
-                boxShadow: `0 0 0 3px ${accentVars["--accent"]}20`,
-              }}
-              _placeholder={{ color: isDark ? "gray.600" : "gray.400" }}
-            />
-          </Box>
+          <OmniboxSearch />
         </Box>
 
         {/* Sort */}

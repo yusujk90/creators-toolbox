@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react"
 import resourceAssets, { type Asset, type Lang } from "@/data/assets"
+import { isExternalSource } from "@/lib/searchSources"
 
 export type AccentColor = "indigo" | "emerald" | "rose" | "amber"
 export type LayoutMode = "grid" | "list"
@@ -23,6 +24,8 @@ interface AppState {
   setActiveCategory: (c: string) => void
   searchTerm: string
   setSearchTerm: (s: string) => void
+  searchTarget: string
+  setSearchTarget: (t: string) => void
   sortMode: SortMode
   setSortMode: (s: SortMode) => void
   activeTag: string
@@ -103,6 +106,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [layout, setLayoutState] = useState<LayoutMode>(() => loadStorage("ctb_layout", "grid"))
   const [activeCategory, setActiveCategoryState] = useState("All")
   const [searchTerm, setSearchTermState] = useState("")
+  const [searchTarget, setSearchTargetState] = useState("internal")
   const [sortMode, setSortModeState] = useState<SortMode>(() => loadStorage("ctb_sort", "best"))
   const [activeTag, setActiveTagState] = useState("All")
   const [favorites, setFavorites] = useState<Set<number>>(() => {
@@ -141,6 +145,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const setActiveCategory = useCallback((c: string) => setActiveCategoryState(c), [])
   const setSearchTerm = useCallback((s: string) => setSearchTermState(s), [])
+  const setSearchTarget = useCallback((t: string) => {
+    setSearchTargetState(t)
+    if (isExternalSource(t)) setSearchTermState("")
+  }, [])
   const setSortMode = useCallback((s: SortMode) => {
     setSortModeState(s)
     localStorage.setItem("ctb_sort", s)
@@ -283,6 +291,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setActiveCategory,
         searchTerm,
         setSearchTerm,
+        searchTarget,
+        setSearchTarget,
         sortMode,
         setSortMode,
         activeTag,

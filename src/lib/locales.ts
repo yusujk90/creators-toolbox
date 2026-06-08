@@ -45,6 +45,11 @@ export const locales: Record<
     categoryLabels: Record<string, string>
     sortOptions: Record<string, string>
     langLabel: string
+    omniboxLabel: string
+    omniboxPlaceholderInternal: string
+    omniboxPlaceholderExternal: string
+    omniboxSearchButton: string
+    omniboxExternalHint: string
   }
 > = {
   id: {
@@ -76,7 +81,7 @@ export const locales: Record<
     frequentlyVisitedSubtitle: "Aset yang paling sering kamu buka.",
     inspireToast: "Aset acak untuk inspirasimu! +5 XP",
     levelUpToast: "LEVEL UP! Kamu kini {badge} Level {level}!",
-    visitCount: "{count}× kunjungan",
+    visitCount: "{count}\u00d7 kunjungan",
     sortLabel: "Urutkan",
     tagLabel: "Semua tag",
     modalSuggestTitle: "Saran Aset",
@@ -90,6 +95,11 @@ export const locales: Record<
     suggestCancel: "Batal",
     suggestSuccessMsg: "Terima kasih! Email saran sedang dibuka.",
     langLabel: "Bahasa",
+    omniboxLabel: "Cari Aset",
+    omniboxPlaceholderInternal: "Cari di database lokal...",
+    omniboxPlaceholderExternal: "Ketik & tekan Enter untuk cari di {site}...",
+    omniboxSearchButton: "Cari",
+    omniboxExternalHint: "Akan membuka tab baru",
     categoryLabels: {
       All: "Semua",
       "3D Models": "3D Models",
@@ -135,7 +145,7 @@ export const locales: Record<
     frequentlyVisitedSubtitle: "Assets you open and visit most often.",
     inspireToast: "Here's a random asset for inspiration! +5 XP",
     levelUpToast: "LEVEL UP! You're now {badge} Level {level}!",
-    visitCount: "{count}× visits",
+    visitCount: "{count}\u00d7 visits",
     sortLabel: "Sort",
     tagLabel: "All tags",
     modalSuggestTitle: "Suggest an Asset",
@@ -149,6 +159,11 @@ export const locales: Record<
     suggestCancel: "Cancel",
     suggestSuccessMsg: "Thanks! An email draft is being opened.",
     langLabel: "Language",
+    omniboxLabel: "Search Assets",
+    omniboxPlaceholderInternal: "Search local database...",
+    omniboxPlaceholderExternal: "Type & press Enter to search {site}...",
+    omniboxSearchButton: "Search",
+    omniboxExternalHint: "Opens a new tab",
     categoryLabels: {
       All: "All",
       "3D Models": "3D Models",
