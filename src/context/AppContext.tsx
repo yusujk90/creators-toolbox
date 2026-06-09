@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from "react"
 import resourceAssets, { type Asset, type Lang } from "@/data/assets"
-import { isExternalSource } from "@/lib/searchSources"
+import { isExternalSource, isAutoMode } from "@/lib/searchSources"
 
 export type AccentColor = "indigo" | "emerald" | "rose" | "amber"
 export type LayoutMode = "grid" | "list"
@@ -40,6 +40,8 @@ interface AppState {
   filteredAssets: Asset[]
   getDescription: (asset: Asset) => string
   accentVars: Record<string, string>
+  aiLoading: boolean
+  setAiLoading: (v: boolean) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -107,6 +109,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [activeCategory, setActiveCategoryState] = useState("All")
   const [searchTerm, setSearchTermState] = useState("")
   const [searchTarget, setSearchTargetState] = useState("internal")
+  const [aiLoading, setAiLoadingState] = useState(false)
   const [sortMode, setSortModeState] = useState<SortMode>(() => loadStorage("ctb_sort", "best"))
   const [activeTag, setActiveTagState] = useState("All")
   const [favorites, setFavorites] = useState<Set<number>>(() => {
@@ -147,13 +150,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setSearchTerm = useCallback((s: string) => setSearchTermState(s), [])
   const setSearchTarget = useCallback((t: string) => {
     setSearchTargetState(t)
-    if (isExternalSource(t)) setSearchTermState("")
+    setAiLoadingState(false)
+    if (isExternalSource(t) || isAutoMode(t)) setSearchTermState("")
   }, [])
   const setSortMode = useCallback((s: SortMode) => {
     setSortModeState(s)
     localStorage.setItem("ctb_sort", s)
   }, [])
   const setActiveTag = useCallback((t: string) => setActiveTagState(t), [])
+
+  const setAiLoading = useCallback((v: boolean) => setAiLoadingState(v), [])
 
   const isFavorite = useCallback((id: number) => favorites.has(id), [favorites])
 
@@ -307,6 +313,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         filteredAssets,
         getDescription,
         accentVars,
+        aiLoading,
+        setAiLoading,
       }}
     >
       {children}

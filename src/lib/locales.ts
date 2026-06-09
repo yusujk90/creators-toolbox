@@ -50,6 +50,13 @@ export const locales: Record<
     omniboxPlaceholderExternal: string
     omniboxSearchButton: string
     omniboxExternalHint: string
+    omniboxAiLabel: string
+    omniboxAiPlaceholder: string
+    omniboxAiButton: string
+    omniboxAiAnalyzing: string
+    omniboxAiError: string
+    omniboxAiRedirecting: string
+    omniboxAiPoweredBy: string
   }
 > = {
   id: {
@@ -100,6 +107,13 @@ export const locales: Record<
     omniboxPlaceholderExternal: "Ketik & tekan Enter untuk cari di {site}...",
     omniboxSearchButton: "Cari",
     omniboxExternalHint: "Akan membuka tab baru",
+    omniboxAiLabel: "Cari Cerdas",
+    omniboxAiPlaceholder: "Ketik apa saja, AI akan memilih sumber terbaik...",
+    omniboxAiButton: "Tanya AI",
+    omniboxAiAnalyzing: "Gemini sedang menganalisis aset terbaik...",
+    omniboxAiError: "Gagal menghubungi Gemini. Coba lagi.",
+    omniboxAiRedirecting: "Mengarahkan ke {site}...",
+    omniboxAiPoweredBy: "Didukung oleh Gemini AI",
     categoryLabels: {
       All: "Semua",
       "3D Models": "3D Models",
@@ -164,6 +178,13 @@ export const locales: Record<
     omniboxPlaceholderExternal: "Type & press Enter to search {site}...",
     omniboxSearchButton: "Search",
     omniboxExternalHint: "Opens a new tab",
+    omniboxAiLabel: "Smart Search",
+    omniboxAiPlaceholder: "Type anything, AI will pick the best source...",
+    omniboxAiButton: "Ask AI",
+    omniboxAiAnalyzing: "Gemini is analyzing the best assets...",
+    omniboxAiError: "Failed to reach Gemini. Please try again.",
+    omniboxAiRedirecting: "Redirecting to {site}...",
+    omniboxAiPoweredBy: "Powered by Gemini AI",
     categoryLabels: {
       All: "All",
       "3D Models": "3D Models",

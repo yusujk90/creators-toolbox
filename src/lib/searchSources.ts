@@ -6,6 +6,7 @@ export interface SearchSource {
 }
 
 export const SEARCH_GROUPS = [
+  "AI POWERED",
   "DATABASE LOKAL",
   "GAME DEV & INDIE HUB",
   "2D & 3D ASSETS",
@@ -15,6 +16,12 @@ export const SEARCH_GROUPS = [
 ] as const
 
 export const SEARCH_SOURCES: SearchSource[] = [
+  {
+    id: "auto",
+    label: "Gemini AI",
+    group: "AI POWERED",
+    buildUrl: () => null,
+  },
   {
     id: "internal",
     label: "Internal Toolbox",
@@ -100,6 +107,10 @@ export function getSourceById(id: string): SearchSource | undefined {
   return SEARCH_SOURCES.find((s) => s.id === id)
 }
 
+export function isAutoMode(id: string): boolean {
+  return id === "auto"
+}
+
 export function isExternalSource(id: string): boolean {
-  return id !== "internal"
+  return id !== "internal" && id !== "auto"
 }

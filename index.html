@@ -14,6 +14,15 @@
       0% { opacity: 0; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+    @keyframes aiShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes aiPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
     * { box-sizing: border-box; }
     body { margin: 0; }
   </style>
