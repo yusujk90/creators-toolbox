@@ -108,7 +108,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [layout, setLayoutState] = useState<LayoutMode>(() => loadStorage("ctb_layout", "grid"))
   const [activeCategory, setActiveCategoryState] = useState("All")
   const [searchTerm, setSearchTermState] = useState("")
-  const [searchTarget, setSearchTargetState] = useState("internal")
+  const [searchTarget, setSearchTargetState] = useState(() => loadStorage("ctb_search_target", "auto"))
   const [aiLoading, setAiLoadingState] = useState(false)
   const [sortMode, setSortModeState] = useState<SortMode>(() => loadStorage("ctb_sort", "best"))
   const [activeTag, setActiveTagState] = useState("All")
@@ -150,6 +150,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setSearchTerm = useCallback((s: string) => setSearchTermState(s), [])
   const setSearchTarget = useCallback((t: string) => {
     setSearchTargetState(t)
+    localStorage.setItem("ctb_search_target", t)
     setAiLoadingState(false)
     if (isExternalSource(t) || isAutoMode(t)) setSearchTermState("")
   }, [])
