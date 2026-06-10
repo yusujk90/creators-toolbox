@@ -8,7 +8,11 @@ let genAI: GoogleGenerativeAI | null = null
 
 function getClient(): GoogleGenerativeAI {
   if (!genAI) {
-    if (!API_KEY) throw new Error("VITE_GEMINI_API_KEY is not configured")
+    if (!API_KEY) {
+      const err = new Error("VITE_GEMINI_API_KEY is not configured")
+      console.error("[Gemini] Init error:", err)
+      throw err
+    }
     genAI = new GoogleGenerativeAI(API_KEY)
   }
   return genAI
@@ -38,32 +42,56 @@ export interface AiRoutingResult {
   reason: string
 }
 
+const FALLBACK: AiRoutingResult = {
+  sourceId: "itchio",
+  reason: "Fallback to Itch.io",
+}
+
 export async function analyzeAndRoute(
   query: string,
   lang: Lang,
   signal?: AbortSignal
 ): Promise<AiRoutingResult> {
-  const client = getClient()
-  const model = client.getGenerativeModel({ model: "gemini-2.0-flash" })
-
-  const result = await model.generateContent({
-    contents: [{ role: "user", parts: [{ text: buildPrompt(query, lang) }] }],
-  })
-
-  if (signal?.aborted) throw new DOMException("Aborted", "AbortError")
-
-  const text = result.response.text().trim()
-  const jsonMatch = text.match(/\{[\s\S]*\}/)
-  if (!jsonMatch) {
-    return { sourceId: "itchio", reason: lang === "id" ? "Fallback ke Itch.io" : "Fallback to Itch.io" }
+  let client: GoogleGenerativeAI
+  try {
+    client = getClient()
+  } catch (err) {
+    console.error("[Gemini] Failed to initialize client:", err)
+    throw err
   }
 
+  const model = client.getGenerativeModel({ model: "gemini-1.5-flash" })
+
   try {
+    console.log("[Gemini] Sending request for query:", query)
+
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: buildPrompt(query, lang) }] }],
+    })
+
+    if (signal?.aborted) throw new DOMException("Aborted", "AbortError")
+
+    const text = result.response.text().trim()
+    console.log("[Gemini] Raw response:", text)
+
+    const jsonMatch = text.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) {
+      console.warn("[Gemini] No JSON found in response, using fallback")
+      return FALLBACK
+    }
+
     const parsed = JSON.parse(jsonMatch[0]) as AiRoutingResult
     const validIds = SEARCH_SOURCES.map((s) => s.id)
-    if (validIds.includes(parsed.sourceId)) return parsed
-    return { sourceId: "itchio", reason: lang === "id" ? "Fallback ke Itch.io" : "Fallback to Itch.io" }
-  } catch {
-    return { sourceId: "itchio", reason: lang === "id" ? "Fallback ke Itch.io" : "Fallback to Itch.io" }
+    if (validIds.includes(parsed.sourceId)) {
+      console.log("[Gemini] Routed to:", parsed.sourceId, "—", parsed.reason)
+      return parsed
+    }
+
+    console.warn("[Gemini] Unknown sourceId:", parsed.sourceId, "— using fallback")
+    return FALLBACK
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") throw err
+    console.error("[Gemini] Request failed:", err)
+    throw err
   }
 }
